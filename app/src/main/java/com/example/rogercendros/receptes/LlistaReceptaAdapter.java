@@ -5,14 +5,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class LlistaReceptaAdapter<T> extends ArrayAdapter<T> {
+public class LlistaReceptaAdapter<Recepta> extends ArrayAdapter<Recepta> {
 
-    public LlistaReceptaAdapter(Context context, List<T> objects) {
+    public LlistaReceptaAdapter(Context context, List<Recepta> objects) {
         super(context, 0, objects);
     }
 
@@ -38,20 +39,14 @@ public class LlistaReceptaAdapter<T> extends ArrayAdapter<T> {
         //Obteniendo instancias de los text views
         TextView titulo = (TextView)listItemView.findViewById(android.R.id.text1);
         TextView subtitulo = (TextView)listItemView.findViewById(android.R.id.text2);
+        ImageView imatge = (ImageView)listItemView.findViewById(R.id.imatge);
 
         //Obteniendo instancia de la Tarea en la posición actual
-        T item = (T)getItem(position);
+        Recepta item = getItem(position);
 
-        //Dividir la cadena en Nombre y Hora
-        String cadenaBruta;
-        String subCadenas [];
-        String delimitador = ",";
-
-        cadenaBruta = item.toString();
-        subCadenas = cadenaBruta.split(delimitador,2);
-
-        titulo.setText(subCadenas[0]);
-        subtitulo.setText(subCadenas[1]);
+        titulo.setText(item.getNomRecepta());
+        subtitulo.setText(item.getDescripcio());
+        imatge.setImageResource(item.getImatge());
 
         //Devolver al ListView la fila creada
         return listItemView;

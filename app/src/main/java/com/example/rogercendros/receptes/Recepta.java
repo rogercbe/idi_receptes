@@ -6,12 +6,14 @@ public class Recepta{
 
     private String nomRecepta;
     private String descripcio;
+    private int imatge;
 
 
-    public Recepta(String nomRecepta, String descripcio){
+    public Recepta(String nomRecepta, String descripcio, int imatge){
 
         this.nomRecepta = nomRecepta;
         this.descripcio = descripcio;
+        this.imatge = imatge;
 
     }
 
@@ -25,9 +27,17 @@ public class Recepta{
         this.descripcio = descripcio;
     }
 
+    public void setImatge(int imatge)
+    {
+        this.imatge = imatge;
+    }
+
     public String getNomRecepta(){return nomRecepta;}
 
     public String getDescripcio(){return descripcio;}
+
+    public int getImatge(){return imatge;}
+
 
     @Override
     public String toString(){return nomRecepta + "," + descripcio;}

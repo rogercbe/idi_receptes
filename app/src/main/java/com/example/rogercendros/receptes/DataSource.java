@@ -9,12 +9,23 @@ public class DataSource {
 
     static{
 
-        receptes.add(new Recepta("Macarrons","5 estrelles"));
-        receptes.add(new Recepta("Canelons","3 estrelles"));
-        receptes.add(new Recepta("Fajitas","4 estrelles"));
-        receptes.add(new Recepta("Pollastre","0 estrelles"));
-        receptes.add(new Recepta("Polla","5 estrelles"));
+        receptes.add(new Recepta("Macarrons","5 estrelles", R.drawable.ic_launcher));
+        receptes.add(new Recepta("Macarrons","5 estrelles", R.drawable.ic_launcher));
+        receptes.add(new Recepta("Macarrons","5 estrelles", R.drawable.ic_launcher));
+        receptes.add(new Recepta("Macarrons","5 estrelles", R.drawable.ic_launcher));
+        receptes.add(new Recepta("Macarrons","5 estrelles", R.drawable.ic_launcher));
+        receptes.add(new Recepta("Macarrons","5 estrelles", R.drawable.ic_launcher));
+        receptes.add(new Recepta("Macarrons","5 estrelles", R.drawable.ic_launcher));
+        receptes.add(new Recepta("Macarrons","5 estrelles", R.drawable.ic_launcher));
+        receptes.add(new Recepta("Macarrons","5 estrelles", R.drawable.ic_launcher));
+        receptes.add(new Recepta("Macarrons","5 estrelles", R.drawable.ic_launcher));
+        receptes.add(new Recepta("Macarrons","5 estrelles", R.drawable.ic_launcher));
+        receptes.add(new Recepta("Macarrons","5 estrelles", R.drawable.ic_launcher));
+        receptes.add(new Recepta("Macarrons","5 estrelles", R.drawable.ic_launcher));
+        receptes.add(new Recepta("Macarrons","5 estrelles", R.drawable.ic_launcher));
+        receptes.add(new Recepta("Macarrons","5 estrelles", R.drawable.ic_launcher));
 
     }
 
 }
+
