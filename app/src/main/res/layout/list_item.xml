@@ -17,6 +17,7 @@
         android:layout_height="wrap_content"
         android:text="New Text"
         android:id="@+id/text1"
+        android:layout_marginTop="10dp"
         android:layout_alignParentTop="true"
         android:layout_toRightOf="@+id/imatge"
         android:textAppearance="@android:style/TextAppearance.Holo.Large"
