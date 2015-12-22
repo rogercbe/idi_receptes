@@ -9,11 +9,15 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import java.util.ArrayList;
+
 
 public class MainActivity extends ActionBarActivity {
 
     private ListView list;
-    private String[] receptes = {"Canelons", "Macarrons", "Carpaccio", "Pizza", "Tocinillo"};
+    private ArrayList receptes;
+
+    ArrayAdapter adaptador;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,7 +25,7 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
 
         list = (ListView)findViewById(R.id.llista);
-        LlistaReceptaAdapter<String> adaptador = new LlistaReceptaAdapter<String>(this, receptes);
+        adaptador = new LlistaReceptaAdapter<Recepta>(this, DataSource.receptes);
         list.setAdapter(adaptador);
     }
 
