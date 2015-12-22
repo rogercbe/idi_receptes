@@ -9,6 +9,7 @@ public class DataSource {
 
     static{
 
+        receptes.add(new Recepta("Pensament d'amanida carbonitzada","5 estrelles", R.drawable.image));
         receptes.add(new Recepta("Macarrons","5 estrelles", R.drawable.ic_launcher));
         receptes.add(new Recepta("Macarrons","5 estrelles", R.drawable.ic_launcher));
         receptes.add(new Recepta("Macarrons","5 estrelles", R.drawable.ic_launcher));
@@ -19,8 +20,7 @@ public class DataSource {
         receptes.add(new Recepta("Macarrons","5 estrelles", R.drawable.ic_launcher));
         receptes.add(new Recepta("Macarrons","5 estrelles", R.drawable.ic_launcher));
         receptes.add(new Recepta("Macarrons","5 estrelles", R.drawable.ic_launcher));
-        receptes.add(new Recepta("Macarrons","5 estrelles", R.drawable.ic_launcher));
-        receptes.add(new Recepta("Macarrons","5 estrelles", R.drawable.ic_launcher));
+        receptes.add(new Recepta("Macarrons","5 estrelles", R.drawable.image));
         receptes.add(new Recepta("Macarrons","5 estrelles", R.drawable.ic_launcher));
         receptes.add(new Recepta("Macarrons","5 estrelles", R.drawable.ic_launcher));
         receptes.add(new Recepta("Macarrons","5 estrelles", R.drawable.ic_launcher));
