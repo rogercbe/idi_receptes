@@ -7,6 +7,7 @@ public class Recepta{
     private String nomRecepta;
     private String descripcio;
     private int imatge;
+    private String nombre;
 
 
     public Recepta(String nomRecepta, String descripcio, int imatge){
@@ -38,7 +39,10 @@ public class Recepta{
 
     public int getImatge(){return imatge;}
 
-
     @Override
     public String toString(){return nomRecepta + "," + descripcio;}
+
+    public String getNombre() {
+        return nombre;
+    }
 }

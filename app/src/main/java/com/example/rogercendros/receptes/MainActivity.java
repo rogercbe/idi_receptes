@@ -25,7 +25,7 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
 
         list = (ListView)findViewById(R.id.llista);
-        adaptador = new LlistaReceptaAdapter<Recepta>(this, DataSource.receptes);
+        adaptador = new LlistaReceptaAdapter(this, DataSource.receptes);
         list.setAdapter(adaptador);
     }
 

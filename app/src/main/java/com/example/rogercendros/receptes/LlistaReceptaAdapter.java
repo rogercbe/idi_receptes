@@ -8,10 +8,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class LlistaReceptaAdapter<Recepta> extends ArrayAdapter<Recepta> {
+public class LlistaReceptaAdapter extends ArrayAdapter<Recepta> {
 
     public LlistaReceptaAdapter(Context context, List<Recepta> objects) {
         super(context, 0, objects);
@@ -29,17 +28,18 @@ public class LlistaReceptaAdapter<Recepta> extends ArrayAdapter<Recepta> {
 
         //Comprobando si el View no existe
         if (null == convertView) {
-            //Si no existe, entonces inflarlo con two_line_list_item.xml
+            //Si no existe, entonces inflarlo con image_list_view.xml
             listItemView = inflater.inflate(
-                    android.R.layout.two_line_list_item,
+                    R.layout.list_item,
                     parent,
                     false);
         }
 
-        //Obteniendo instancias de los text views
-        TextView titulo = (TextView)listItemView.findViewById(android.R.id.text1);
-        TextView subtitulo = (TextView)listItemView.findViewById(android.R.id.text2);
+        //Obteniendo instancias de los elementos
+        TextView titulo = (TextView)listItemView.findViewById(R.id.text1);
+        TextView subtitulo = (TextView)listItemView.findViewById(R.id.text2);
         ImageView imatge = (ImageView)listItemView.findViewById(R.id.imatge);
+
 
         //Obteniendo instancia de la Tarea en la posición actual
         Recepta item = getItem(position);
