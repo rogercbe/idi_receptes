@@ -5,7 +5,7 @@ import java.util.List;
 
 public class DataSource {
 
-    static List receptes = new ArrayList<Recepta>();
+    //static List categories = new List<String>();
 
     static{
 

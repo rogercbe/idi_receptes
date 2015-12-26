@@ -11,8 +11,7 @@ public class Recepta{
     private int imatge;
 
 
-    public Recepta(){
-    }
+    public Recepta(){}
 
     public void setId(int id)
     {

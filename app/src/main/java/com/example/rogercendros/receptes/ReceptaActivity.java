@@ -4,14 +4,28 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
+import android.widget.Toast;
 
 
 public class ReceptaActivity extends ActionBarActivity {
+
+    private DBManager dbManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recepta);
+        dbManager = new DBManager(this, null);
+
+        Bundle bundle = getIntent().getExtras();
+        int id = bundle.getInt("id");
+
+        Recepta recepta = dbManager.llegirReceptaPerId(id);
+
+        TextView ex = (TextView)findViewById(R.id.text1);
+        String aux = String.valueOf(recepta.getId());
+        ex.setText(aux);
     }
 
 

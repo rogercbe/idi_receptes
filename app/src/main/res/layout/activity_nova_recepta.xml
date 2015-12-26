@@ -10,9 +10,10 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:hint="Nom de la recepta"
         android:id="@+id/titol" />
 
-    <EditText
+    <Spinner
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/categoria" />
@@ -20,21 +21,15 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:hint="Descripció"
         android:id="@+id/descripcio" />
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="New Button"
-        android:id="@+id/button2"
+        android:text="Afegir"
+        android:id="@+id/btnAfegir"
+        android:layout_alignParentBottom="true"
         android:onClick="afegirRecepta" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="New Button"
-        android:id="@+id/button3"
-        android:onClick="tancar"
-        android:nestedScrollingEnabled="true" />
 
 </LinearLayout>

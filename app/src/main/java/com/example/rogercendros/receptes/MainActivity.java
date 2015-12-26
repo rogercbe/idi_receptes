@@ -39,8 +39,10 @@ public class MainActivity extends ActionBarActivity {
                 new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        String recepta = String.valueOf(parent.getItemAtPosition(position));
-                        Toast.makeText(MainActivity.this, recepta, Toast.LENGTH_SHORT).show();
+                        //String recepta = String.valueOf(parent.getItemAtPosition(position));
+                        Recepta recepta = (Recepta) adaptador.getItem(position);
+                        //Toast.makeText(MainActivity.this, recepta.getId(), Toast.LENGTH_SHORT).show();
+                        obrirDetall(recepta.getId());
                     }
                 }
         );
@@ -49,7 +51,7 @@ public class MainActivity extends ActionBarActivity {
     public void onButtonClick(View view)
     {
         Intent intent = new Intent(this, NovaRecepta.class);
-        startActivity(intent);
+        startActivityForResult(intent, 1);
     }
 
     @Override
@@ -98,5 +100,14 @@ public class MainActivity extends ActionBarActivity {
             if (resultCode == MainActivity.RESULT_CANCELED) {
             }
         }
-    }//onActivityResult
+    }
+
+    public void obrirDetall(int id)
+    {
+        Intent i = new Intent(this, ReceptaActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putInt("id", id);
+        i.putExtras(bundle);
+        startActivity(i);
+    }
 }

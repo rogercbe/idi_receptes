@@ -54,6 +54,31 @@ public class DBManager extends SQLiteOpenHelper {
         db.execSQL("DELETE FROM receptes WHERE _id = " + id);
     }
 
+    public Recepta llegirReceptaPerId(int _id)
+    {
+        SQLiteDatabase db = getWritableDatabase();
+        Cursor cursor =  db.rawQuery("select * from receptes where _id =" + _id  , null);
+        Recepta recepta = null;
+        if (cursor != null)
+        {
+            if (cursor.moveToFirst())
+            {
+                int id = cursor.getInt(cursor.getColumnIndex("_id"));
+                String titol = cursor.getString(cursor.getColumnIndex("_titol"));
+                String categoria = cursor.getString(cursor.getColumnIndex("_categoria"));
+                String descripcio = cursor.getString(cursor.getColumnIndex("_descripcio"));
+                recepta = new Recepta();
+                recepta.setId(id);
+                recepta.setTitol(titol);
+                recepta.setCategoria(categoria);
+                recepta.setDescripcio(descripcio);
+            }
+            cursor.close();
+        }
+        return recepta;
+
+    }
+
     // llegir totes les receptes
     public List llegirReceptes()
     {
@@ -65,8 +90,10 @@ public class DBManager extends SQLiteOpenHelper {
         if (c.moveToFirst()) {
             do {
                 Recepta recepta = new Recepta();
+                recepta.setId(c.getInt(c.getColumnIndexOrThrow("_id")));
                 recepta.setTitol(c.getString(c.getColumnIndexOrThrow("_titol")));
                 recepta.setCategoria(c.getString(c.getColumnIndexOrThrow("_categoria")));
+                recepta.setDescripcio(c.getString(c.getColumnIndexOrThrow("_descripcio")));
                 recepta.setImatge(R.drawable.image);
                 receptes.add(recepta);
             } while(c.moveToNext());

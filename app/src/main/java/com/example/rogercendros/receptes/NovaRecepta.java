@@ -1,21 +1,30 @@
 package com.example.rogercendros.receptes;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
 import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class NovaRecepta extends Activity {
 
     private DBManager dbManager;
     private EditText titol;
-    private EditText categoria;
+    private Spinner categoria;
     private EditText descripcio;
+    private SpinnerAdapter adaptador;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,8 +32,10 @@ public class NovaRecepta extends Activity {
         setContentView(R.layout.activity_nova_recepta);
 
         titol = (EditText)findViewById(R.id.titol);
-        categoria = (EditText)findViewById(R.id.categoria);
+        categoria = (Spinner)findViewById(R.id.categoria);
         descripcio = (EditText)findViewById(R.id.descripcio);
+
+        inicialitzarSpinner();
 
         dbManager = new DBManager(this, null);
     }
@@ -33,30 +44,20 @@ public class NovaRecepta extends Activity {
     {
         Recepta recepta = new Recepta();
         recepta.setTitol(titol.getText().toString());
-        recepta.setCategoria(categoria.getText().toString());
+        recepta.setCategoria(categoria.getSelectedItem().toString());
         recepta.setDescripcio(descripcio.getText().toString());
         if(esValid()) {
             dbManager.afegirRecepta(recepta);
-            netejarCamps();
+            Intent returnIntent = new Intent();
+            setResult(MainActivity.RESULT_OK, returnIntent);
+            finish();
         }
         else Toast.makeText(NovaRecepta.this, "Tots els camps són obligatoris!", Toast.LENGTH_SHORT).show();
     }
 
-    public void tancar(View view)
-    {
-        finish();
-    }
-
-    public void netejarCamps()
-    {
-        titol.setText("");
-        categoria.setText("");
-        descripcio.setText("");
-    }
-
     public boolean esValid()
     {
-        if(titol.getText().toString().isEmpty() || categoria.getText().toString().isEmpty() || descripcio.getText().toString().isEmpty()) return false;
+        if(titol.getText().toString().isEmpty() || categoria.getSelectedItem().toString().isEmpty() || descripcio.getText().toString().isEmpty()) return false;
         return true;
     }
 
@@ -81,5 +82,27 @@ public class NovaRecepta extends Activity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void inicialitzarSpinner()
+    {
+        List<String> spinnerArray =  new ArrayList<String>();
+
+        spinnerArray.add("Cuina Asiàtica");
+        spinnerArray.add("Cuina Creativa");
+        spinnerArray.add("Cuina Mediterrània");
+        spinnerArray.add("Cuina Mexicana");
+        spinnerArray.add("Cuina Moderna");
+        spinnerArray.add("Cuina Occidental");
+        spinnerArray.add("Cuina Oriental");
+        spinnerArray.add("Cuina Tradicional");
+        spinnerArray.add("Cuina Vegetariana");
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+                this, android.R.layout.simple_spinner_item, spinnerArray);
+
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        Spinner sItems = (Spinner) findViewById(R.id.categoria);
+        sItems.setAdapter(adapter);
     }
 }
