@@ -9,4 +9,18 @@
         android:layout_height="wrap_content"
         android:background="#fff"/>
 
+    <Button
+        android:background="@drawable/roundbutton"
+        android:textColor="#fff"
+        android:textSize="25dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:text="+"
+        android:id="@+id/button"
+        android:layout_marginBottom="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:onClick="onButtonClick" />
+
 </RelativeLayout>

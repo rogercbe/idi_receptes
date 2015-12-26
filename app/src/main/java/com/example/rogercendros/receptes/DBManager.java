@@ -24,7 +24,8 @@ public class DBManager extends SQLiteOpenHelper {
                 "_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "_titol TEXT, " +
                 "_categoria TEXT, " +
-                "_descripcio TEXT)";
+                "_descripcio TEXT," +
+                "_data TIMESTAMP DEFAULT CURRENT_TIMESTAMP)";
         db.execSQL(query);
     }
 
@@ -58,7 +59,8 @@ public class DBManager extends SQLiteOpenHelper {
     {
         List receptes = new ArrayList<Recepta>();
         SQLiteDatabase db = getWritableDatabase();
-        Cursor c = db.query("receptes", null, null, null, null, null, null);
+        //query("table", tableColumns, whereClause, whereArgs, null, null, orderBy);
+        Cursor c = db.query("receptes", null, null, null, null, null, "_data DESC");
 
         if (c.moveToFirst()) {
             do {

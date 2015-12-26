@@ -1,5 +1,6 @@
 package com.example.rogercendros.receptes;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -7,6 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -26,12 +28,6 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
         dbManager = new DBManager(this, null);
 
-        Recepta recipe = new Recepta();
-        recipe.setTitol("titol");
-        recipe.setCategoria("mediterrani");
-        recipe.setDescripcio("una merda");
-        dbManager.afegirRecepta(recipe);
-
         // Carregar la llista
         list = (ListView)findViewById(R.id.llista);
         //adaptador = new LlistaReceptaAdapter(this, DataSource.receptes);
@@ -48,9 +44,13 @@ public class MainActivity extends ActionBarActivity {
                     }
                 }
         );
-
     }
 
+    public void onButtonClick(View view)
+    {
+        Intent intent = new Intent(this, NovaRecepta.class);
+        startActivity(intent);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -73,4 +73,30 @@ public class MainActivity extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    // Reescriure la llista cada cop que tornem
+    @Override
+    public void onResume(){
+        super.onResume();
+        dbManager = new DBManager(this, null);
+
+        // Carregar la llista
+        list = (ListView)findViewById(R.id.llista);
+        //adaptador = new LlistaReceptaAdapter(this, DataSource.receptes);
+        adaptador = new LlistaReceptaAdapter(this, dbManager.llegirReceptes());
+        list.setAdapter(adaptador);
+    }
+
+    // Mostrar Toast si canviem l'estat de la llista
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if (requestCode == 1) {
+            if(resultCode == MainActivity.RESULT_OK){
+                Toast.makeText(MainActivity.this, "Afegida una nova recepta!", Toast.LENGTH_SHORT).show();
+            }
+            if (resultCode == MainActivity.RESULT_CANCELED) {
+            }
+        }
+    }//onActivityResult
 }

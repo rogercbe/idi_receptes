@@ -20,6 +20,10 @@
             android:name=".ReceptaActivity"
             android:label="@string/title_activity_recepta" >
         </activity>
+        <activity
+            android:name=".NovaRecepta"
+            android:label="@string/title_activity_nova_recepta" >
+        </activity>
     </application>
 
 </manifest>
