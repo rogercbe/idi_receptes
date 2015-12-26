@@ -29,6 +29,5 @@
         android:text="New Text"
         android:id="@+id/text2"
         android:layout_below="@+id/text1"
-        android:layout_toRightOf="@+id/imatge"
-        android:layout_alignParentBottom="true" />
+        android:layout_toRightOf="@+id/imatge"/>
 </RelativeLayout>

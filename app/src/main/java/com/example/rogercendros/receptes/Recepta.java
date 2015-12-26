@@ -6,14 +6,15 @@ public class Recepta{
 
     private String nomRecepta;
     private String descripcio;
+    private String categoria;
     private int imatge;
-    private String nombre;
 
 
-    public Recepta(String nomRecepta, String descripcio, int imatge){
+    public Recepta(String nomRecepta, String descripcio, String categoria, int imatge){
 
         this.nomRecepta = nomRecepta;
         this.descripcio = descripcio;
+        this.categoria = categoria;
         this.imatge = imatge;
 
     }
@@ -28,6 +29,11 @@ public class Recepta{
         this.descripcio = descripcio;
     }
 
+    public void setCategoria(String categoria)
+    {
+        this.categoria = categoria;
+    }
+
     public void setImatge(int imatge)
     {
         this.imatge = imatge;
@@ -37,12 +43,10 @@ public class Recepta{
 
     public String getDescripcio(){return descripcio;}
 
+    public String getCategoria(){return categoria;}
+
     public int getImatge(){return imatge;}
 
     @Override
     public String toString(){return nomRecepta + "," + descripcio;}
-
-    public String getNombre() {
-        return nombre;
-    }
 }

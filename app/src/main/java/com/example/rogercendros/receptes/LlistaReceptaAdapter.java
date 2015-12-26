@@ -45,7 +45,7 @@ public class LlistaReceptaAdapter extends ArrayAdapter<Recepta> {
         Recepta item = getItem(position);
 
         titulo.setText(item.getNomRecepta());
-        subtitulo.setText(item.getDescripcio());
+        subtitulo.setText(item.getCategoria());
         imatge.setImageResource(item.getImatge());
 
         //Devolver al ListView la fila creada
