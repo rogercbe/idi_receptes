@@ -4,24 +4,24 @@ import java.util.ArrayList;
 
 public class Recepta{
 
-    private String nomRecepta;
+    private int id;
+    private String titol;
     private String descripcio;
     private String categoria;
     private int imatge;
 
 
-    public Recepta(String nomRecepta, String descripcio, String categoria, int imatge){
-
-        this.nomRecepta = nomRecepta;
-        this.descripcio = descripcio;
-        this.categoria = categoria;
-        this.imatge = imatge;
-
+    public Recepta(){
     }
 
-    public void setNomRecepta(String nomRecepta)
+    public void setId(int id)
     {
-        this.nomRecepta = nomRecepta;
+        this.id = id;
+    }
+
+    public void setTitol(String titol)
+    {
+        this.titol = titol;
     }
 
     public void setDescripcio(String descripcio)
@@ -39,7 +39,9 @@ public class Recepta{
         this.imatge = imatge;
     }
 
-    public String getNomRecepta(){return nomRecepta;}
+    public int getId(){return id;}
+
+    public String getTitol(){return titol;}
 
     public String getDescripcio(){return descripcio;}
 
@@ -48,5 +50,5 @@ public class Recepta{
     public int getImatge(){return imatge;}
 
     @Override
-    public String toString(){return nomRecepta + "," + descripcio;}
+    public String toString(){return titol;}
 }

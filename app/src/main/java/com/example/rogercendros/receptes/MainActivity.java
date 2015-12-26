@@ -17,18 +17,25 @@ public class MainActivity extends ActionBarActivity {
 
     private ListView list;
     private ArrayList receptes;
-
-    ArrayAdapter adaptador;
+    private ArrayAdapter adaptador;
+    private DBManager dbManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        dbManager = new DBManager(this, null);
 
-        // Buscar la llista
+        Recepta recipe = new Recepta();
+        recipe.setTitol("titol");
+        recipe.setCategoria("mediterrani");
+        recipe.setDescripcio("una merda");
+        dbManager.afegirRecepta(recipe);
+
+        // Carregar la llista
         list = (ListView)findViewById(R.id.llista);
-        // Transformar datasource en items de la llista
-        adaptador = new LlistaReceptaAdapter(this, DataSource.receptes);
+        //adaptador = new LlistaReceptaAdapter(this, DataSource.receptes);
+        adaptador = new LlistaReceptaAdapter(this, dbManager.llegirReceptes());
         list.setAdapter(adaptador);
 
         // Event on click de la llista
