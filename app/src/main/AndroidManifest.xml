@@ -28,6 +28,14 @@
             android:name=".FotosActivity"
             android:label="@string/title_activity_fotos" >
         </activity>
+        <activity
+            android:name=".EditarRecepta"
+            android:label="@string/title_activity_editar_recepta" >
+        </activity>
+        <activity
+            android:name=".IngredientsActivity"
+            android:label="@string/title_activity_ingredients" >
+        </activity>
     </application>
 
 </manifest>

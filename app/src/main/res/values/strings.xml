@@ -7,5 +7,7 @@
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_nova_recepta">NovaRecepta</string>
     <string name="title_activity_fotos">FotosActivity</string>
+    <string name="title_activity_editar_recepta">EditarRecepta</string>
+    <string name="title_activity_ingredients">IngredientsActivity</string>
 
 </resources>

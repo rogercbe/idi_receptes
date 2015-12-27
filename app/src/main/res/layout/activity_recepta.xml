@@ -67,4 +67,18 @@
         android:layout_toRightOf="@+id/imatge"
         android:layout_below="@+id/titol"/>
 
+    <Button
+        android:background="@drawable/roundbutton"
+        android:textColor="#fff"
+        android:textSize="15dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:text="Editar"
+        android:id="@+id/button"
+        android:layout_marginBottom="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:onClick="onButtonClick" />
+
 </RelativeLayout>

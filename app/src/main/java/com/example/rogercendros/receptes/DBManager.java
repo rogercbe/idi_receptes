@@ -61,6 +61,18 @@ public class DBManager extends SQLiteOpenHelper {
         db.close();
     }
 
+    public void actualitzarRecepta(Recepta recepta)
+    {
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues valors = new ContentValues();
+        valors.put("_titol", recepta.getTitol());
+        valors.put("_categoria", recepta.getCategoria());
+        valors.put("_descripcio", recepta.getDescripcio());
+        valors.put("_imatge", recepta.getImatge());
+        db.update("receptes", valors, "_id = " + recepta.getId(), null);
+        db.close();
+    }
+
     // Esborrar una recepta
     public void esborrarRecepta(int id)
     {
@@ -118,6 +130,38 @@ public class DBManager extends SQLiteOpenHelper {
         if (c != null && c.isClosed()) c.close();
 
         return receptes;
+    }
+
+    // llegir totes les receptes
+    public ArrayList<Ingredient> llegirIngredients()
+    {
+        ArrayList<Ingredient> ingredients = new ArrayList<Ingredient>();
+        SQLiteDatabase db = getWritableDatabase();
+        //query("table", tableColumns, whereClause, whereArgs, null, null, orderBy);
+        Cursor c = db.query("ingredients", null, null, null, null, null, null);
+
+        if (c.moveToFirst()) {
+            do {
+                Ingredient ingredient = new Ingredient();
+                ingredient.setId(c.getInt(c.getColumnIndexOrThrow("_id")));
+                ingredient.setNom(c.getString(c.getColumnIndexOrThrow("_nom")));
+                ingredients.add(ingredient);
+            } while(c.moveToNext());
+        }
+
+        if (c != null && c.isClosed()) c.close();
+
+        return ingredients;
+    }
+
+    // Afegir un nou ingredient
+    public void afegirIngredient(String ingredient)
+    {
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues valors = new ContentValues();
+        valors.put("_ingredient", ingredient);
+        db.insert("ingredients", null, valors);
+        db.close();
     }
 }
 

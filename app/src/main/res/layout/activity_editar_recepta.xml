@@ -1,4 +1,4 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
@@ -11,56 +11,38 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Nom de la recepta"
-        android:layout_marginTop="20dp"
-        android:id="@+id/titol"
-        android:layout_below="@+id/btnFoto" />
+        android:id="@+id/titol" />
 
     <Spinner
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/categoria"
-        android:layout_marginTop="20dp"
-        android:layout_below="@+id/titol"
-        android:layout_alignParentStart="true" />
+        android:id="@+id/categoria" />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Descripció"
-        android:id="@+id/descripcio"
-        android:layout_marginTop="20dp"
-        android:layout_below="@+id/categoria"
-        android:layout_alignParentStart="true" />
+        android:id="@+id/descripcio" />
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Afegir Recepta"
-        android:id="@+id/btnAfegir"
-        android:onClick="afegirRecepta"
+        android:text="Actualitzar Recepta"
+        android:id="@+id/btnEditar"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true" />
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Seleccionar Ingredients"
-        android:id="@+id/btnSeleccionar"
-        android:onClick="seleccionarIngredients"
-        android:layout_below="@+id/descripcio" />
+        android:onClick="actualitzarRecepta" />
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Canviar Imatge"
         android:id="@+id/btnFoto"
-        android:onClick="seleccionarFoto"
-        android:layout_below="@+id/imatge"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentBottom="true"
+        android:onClick="seleccionarFoto" />
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/imatge" />
 
-</RelativeLayout>
+</LinearLayout>

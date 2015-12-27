@@ -1,11 +1,14 @@
 package com.example.rogercendros.receptes;
 
+import android.content.Intent;
 import android.media.Image;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,6 +20,7 @@ public class ReceptaActivity extends ActionBarActivity {
     private TextView titol;
     private TextView categoria;
     private TextView descripcio;
+    private Recepta recepta;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +31,7 @@ public class ReceptaActivity extends ActionBarActivity {
         Bundle bundle = getIntent().getExtras();
         int id = bundle.getInt("id");
 
-        Recepta recepta = dbManager.llegirReceptaPerId(id);
+        recepta = dbManager.llegirReceptaPerId(id);
 
         titol = (TextView)findViewById(R.id.titol);
         categoria = (TextView)findViewById(R.id.categoria);
@@ -61,5 +65,44 @@ public class ReceptaActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void onButtonClick(View view)
+    {
+        Intent i = new Intent(this, EditarRecepta.class);
+        Bundle bundle = new Bundle();
+        bundle.putInt("id", recepta.getId());
+        i.putExtras(bundle);
+        startActivityForResult(i, 8);
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        dbManager = new DBManager(this, null);
+
+        recepta = dbManager.llegirReceptaPerId(recepta.getId());
+
+        titol = (TextView)findViewById(R.id.titol);
+        categoria = (TextView)findViewById(R.id.categoria);
+        descripcio = (TextView)findViewById(R.id.descripcio);
+        imatge = (ImageView)findViewById(R.id.imatge);
+
+        titol.setText(recepta.getTitol());
+        categoria.setText(recepta.getCategoria());
+        descripcio.setText(recepta.getDescripcio());
+        imatge.setImageResource(recepta.getImatge());
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if (requestCode == 8) {
+            if(resultCode == ReceptaActivity.RESULT_OK){
+                Toast.makeText(ReceptaActivity.this, "S'ha actualitzat la recepta!", Toast.LENGTH_SHORT).show();
+            }
+            if (resultCode == ReceptaActivity.RESULT_CANCELED) {
+            }
+        }
     }
 }

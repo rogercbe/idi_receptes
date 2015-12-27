@@ -1,6 +1,5 @@
 package com.example.rogercendros.receptes;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -11,79 +10,54 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
-import android.widget.SpinnerAdapter;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class NovaRecepta extends Activity {
+public class EditarRecepta extends ActionBarActivity {
 
     private DBManager dbManager;
+    private ImageView imatge;
     private EditText titol;
     private Spinner categoria;
     private EditText descripcio;
-    private ImageView imatge;
     private int idDrawable;
-    private SpinnerAdapter adaptador;
-
+    private Recepta recepta;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_nova_recepta);
-
-        idDrawable = R.drawable.defecte;
-        titol = (EditText)findViewById(R.id.titol);
-        categoria = (Spinner)findViewById(R.id.categoria);
-        descripcio = (EditText)findViewById(R.id.descripcio);
-        imatge = (ImageView)findViewById(R.id.imatge);
-        imatge.setImageResource(idDrawable);
+        setContentView(R.layout.activity_editar_recepta);
 
         inicialitzarSpinner();
 
         dbManager = new DBManager(this, null);
+
+        Bundle bundle = getIntent().getExtras();
+        int id = bundle.getInt("id");
+
+        recepta = dbManager.llegirReceptaPerId(id);
+
+        titol = (EditText)findViewById(R.id.titol);
+        categoria = (Spinner)findViewById(R.id.categoria);
+        descripcio = (EditText)findViewById(R.id.descripcio);
+        imatge = (ImageView)findViewById(R.id.imatge);
+
+        titol.setText(recepta.getTitol());
+        categoria.setSelection(((ArrayAdapter<String>)categoria.getAdapter()).getPosition(recepta.getCategoria()));
+        descripcio.setText(recepta.getDescripcio());
+        imatge.setImageResource(recepta.getImatge());
+        idDrawable = recepta.getImatge();
     }
 
-    public void afegirRecepta(View view)
-    {
-        Recepta recepta = new Recepta();
-        recepta.setTitol(titol.getText().toString());
-        recepta.setCategoria(categoria.getSelectedItem().toString());
-        recepta.setDescripcio(descripcio.getText().toString());
-        recepta.setImatge(idDrawable);
-        if(esValid()) {
-            dbManager.afegirRecepta(recepta);
-            Intent returnIntent = new Intent();
-            setResult(MainActivity.RESULT_OK, returnIntent);
-            finish();
-        }
-        else Toast.makeText(NovaRecepta.this, "Tots els camps són obligatoris!", Toast.LENGTH_SHORT).show();
-    }
-
-    public boolean esValid()
-    {
-        if(titol.getText().toString().isEmpty() || categoria.getSelectedItem().toString().isEmpty() || descripcio.getText().toString().isEmpty()) return false;
-        return true;
-    }
-
-    public void seleccionarFoto(View view)
-    {
-        Intent intent = new Intent(this, FotosActivity.class);
-        startActivityForResult(intent, 5);
-    }
-
-    public void seleccionarIngredients(View view)
-    {
-        Intent intent = new Intent(this, IngredientsActivity.class);
-        startActivityForResult(intent, 10);
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_nova_recepta, menu);
+        getMenuInflater().inflate(R.menu.menu_editar_recepta, menu);
         return true;
     }
 
@@ -100,6 +74,47 @@ public class NovaRecepta extends Activity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void actualitzarRecepta(View view)
+    {
+        recepta.setTitol(titol.getText().toString());
+        recepta.setCategoria(categoria.getSelectedItem().toString());
+        recepta.setDescripcio(descripcio.getText().toString());
+        recepta.setImatge(idDrawable);
+        if(esValid()) {
+            dbManager.actualitzarRecepta(recepta);
+            Intent returnIntent = new Intent();
+            setResult(ReceptaActivity.RESULT_OK, returnIntent);
+            finish();
+        }
+        else Toast.makeText(EditarRecepta.this, "Tots els camps són obligatoris!", Toast.LENGTH_SHORT).show();
+    }
+
+    public boolean esValid()
+    {
+        if(titol.getText().toString().isEmpty() || categoria.getSelectedItem().toString().isEmpty() || descripcio.getText().toString().isEmpty()) return false;
+        return true;
+    }
+
+    public void seleccionarFoto(View view)
+    {
+        Intent intent = new Intent(this, FotosActivity.class);
+        startActivityForResult(intent, 6);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if (requestCode == 6) {
+            if(resultCode == MainActivity.RESULT_OK){
+                String result = data.getStringExtra("result");
+                idDrawable = Integer.parseInt(result);
+                imatge.setImageResource(idDrawable);
+            }
+            if (resultCode == MainActivity.RESULT_CANCELED) {
+            }
+        }
     }
 
     public void inicialitzarSpinner()
@@ -122,19 +137,5 @@ public class NovaRecepta extends Activity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         Spinner sItems = (Spinner) findViewById(R.id.categoria);
         sItems.setAdapter(adapter);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
-        if (requestCode == 5) {
-            if(resultCode == MainActivity.RESULT_OK){
-                String result = data.getStringExtra("result");
-                idDrawable = Integer.parseInt(result);
-                imatge.setImageResource(idDrawable);
-            }
-            if (resultCode == MainActivity.RESULT_CANCELED) {
-            }
-        }
     }
 }
