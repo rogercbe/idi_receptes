@@ -133,18 +133,18 @@ public class DBManager extends SQLiteOpenHelper {
     }
 
     // llegir totes les receptes
-    public ArrayList<Ingredient> llegirIngredients()
+    public List llegirIngredients()
     {
-        ArrayList<Ingredient> ingredients = new ArrayList<Ingredient>();
+        List ingredients = new ArrayList<Ingredient>();
         SQLiteDatabase db = getWritableDatabase();
         //query("table", tableColumns, whereClause, whereArgs, null, null, orderBy);
-        Cursor c = db.query("ingredients", null, null, null, null, null, null);
+        Cursor c = db.query("ingredients", null, null, null, null, null, "_ingredient ASC");
 
         if (c.moveToFirst()) {
             do {
                 Ingredient ingredient = new Ingredient();
                 ingredient.setId(c.getInt(c.getColumnIndexOrThrow("_id")));
-                ingredient.setNom(c.getString(c.getColumnIndexOrThrow("_nom")));
+                ingredient.setNom(c.getString(c.getColumnIndexOrThrow("_ingredient")));
                 ingredients.add(ingredient);
             } while(c.moveToNext());
         }

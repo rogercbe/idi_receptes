@@ -25,4 +25,16 @@ public class Ingredient {
 
     @Override
     public String toString(){return nom;}
+
+    @Override
+    public boolean equals(Object v) {
+        boolean retVal = false;
+
+        if (v instanceof Ingredient){
+            Ingredient i = (Ingredient) v;
+            retVal = i.id == this.id;
+        }
+
+        return retVal;
+    }
 }

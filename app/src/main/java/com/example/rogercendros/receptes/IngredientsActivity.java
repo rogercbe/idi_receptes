@@ -4,7 +4,8 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ArrayAdapter;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -17,19 +18,32 @@ public class IngredientsActivity extends ActionBarActivity {
     private ListView llista;
     private IngredientsAdapter adaptador;
     private DBManager dbManager;
+    private List llistaIngredients;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ingredients);
 
+        llistaIngredients = new ArrayList<Ingredient>();
+
         dbManager = new DBManager(this, null);
 
         llista = (ListView)findViewById(R.id.listView);
         adaptador = new IngredientsAdapter(this, dbManager.llegirIngredients());
         llista.setAdapter(adaptador);
-    }
 
+        // Event on click de la llista
+        llista.setOnItemClickListener(
+                new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        Ingredient ingredient = (Ingredient) adaptador.getItem(position);
+                        toggleIngredient(ingredient);
+                    }
+                }
+        );
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -51,5 +65,13 @@ public class IngredientsActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void toggleIngredient(Ingredient ingredient) {
+        if(llistaIngredients.contains(ingredient)) {
+            llistaIngredients.remove(ingredient);
+        } else {
+            llistaIngredients.add(ingredient);
+        }
     }
 }

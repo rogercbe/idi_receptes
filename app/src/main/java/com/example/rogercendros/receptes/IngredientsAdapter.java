@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
@@ -32,16 +31,10 @@ class IngredientsAdapter extends ArrayAdapter<Ingredient> {
         }
 
         // Crear instàncies dels elements
-        TextView recepta = (TextView)listItemView.findViewById(R.id.text1);
-
+        TextView txtIngredient = (TextView)listItemView.findViewById(R.id.ingredient);
         Ingredient ingredient = getItem(position);
-
         // Assignació als elements
-        recepta.setText(item.getTitol());
-        categoria.setText(item.getCategoria());
-        imatge.setImageResource(item.getImatge());
-
+        txtIngredient.setText(ingredient.getNom());
         return listItemView;
-
     }
 }
