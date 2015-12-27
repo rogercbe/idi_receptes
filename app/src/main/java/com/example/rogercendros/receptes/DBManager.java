@@ -72,6 +72,7 @@ public class DBManager extends SQLiteOpenHelper {
                 recepta.setTitol(titol);
                 recepta.setCategoria(categoria);
                 recepta.setDescripcio(descripcio);
+                recepta.setImatge(R.drawable.image);
             }
             cursor.close();
         }

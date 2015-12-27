@@ -1,9 +1,11 @@
 package com.example.rogercendros.receptes;
 
+import android.media.Image;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -11,6 +13,10 @@ import android.widget.Toast;
 public class ReceptaActivity extends ActionBarActivity {
 
     private DBManager dbManager;
+    private ImageView imatge;
+    private TextView titol;
+    private TextView categoria;
+    private TextView descripcio;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,9 +29,15 @@ public class ReceptaActivity extends ActionBarActivity {
 
         Recepta recepta = dbManager.llegirReceptaPerId(id);
 
-        TextView ex = (TextView)findViewById(R.id.text1);
-        String aux = String.valueOf(recepta.getId());
-        ex.setText(aux);
+        titol = (TextView)findViewById(R.id.titol);
+        categoria = (TextView)findViewById(R.id.categoria);
+        descripcio = (TextView)findViewById(R.id.descripcio);
+        imatge = (ImageView)findViewById(R.id.imatge);
+
+        titol.setText(recepta.getTitol());
+        categoria.setText(recepta.getCategoria());
+        descripcio.setText(recepta.getDescripcio());
+        imatge.setImageResource(recepta.getImatge());
     }
 
 
