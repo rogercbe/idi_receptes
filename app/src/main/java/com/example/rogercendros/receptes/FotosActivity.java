@@ -1,9 +1,12 @@
 package com.example.rogercendros.receptes;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.Toast;
 
@@ -26,6 +29,16 @@ public class FotosActivity extends ActionBarActivity {
         gv = (GridView) findViewById(R.id.grid);
         adaptador = new FotosAdapter(this);
         gv.setAdapter(adaptador);
+
+        gv.setOnItemClickListener(
+                new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        Foto foto = (Foto) adaptador.getItem(position);
+                        tornarImatge(foto.getIdDrawable());
+                    }
+                }
+        );
 
     }
 
@@ -50,5 +63,13 @@ public class FotosActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void tornarImatge(int id)
+    {
+        Intent returnIntent = new Intent();
+        returnIntent.putExtra("result", String.valueOf(id));
+        setResult(NovaRecepta.RESULT_OK,returnIntent);
+        finish();
     }
 }

@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 import android.widget.Toast;
@@ -23,6 +24,8 @@ public class NovaRecepta extends Activity {
     private EditText titol;
     private Spinner categoria;
     private EditText descripcio;
+    private ImageView imatge;
+    private int idDrawable;
     private SpinnerAdapter adaptador;
 
 
@@ -31,9 +34,12 @@ public class NovaRecepta extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nova_recepta);
 
+        idDrawable = R.drawable.defecte;
         titol = (EditText)findViewById(R.id.titol);
         categoria = (Spinner)findViewById(R.id.categoria);
         descripcio = (EditText)findViewById(R.id.descripcio);
+        imatge = (ImageView)findViewById(R.id.imatge);
+        imatge.setImageResource(idDrawable);
 
         inicialitzarSpinner();
 
@@ -46,6 +52,7 @@ public class NovaRecepta extends Activity {
         recepta.setTitol(titol.getText().toString());
         recepta.setCategoria(categoria.getSelectedItem().toString());
         recepta.setDescripcio(descripcio.getText().toString());
+        recepta.setImatge(idDrawable);
         if(esValid()) {
             dbManager.afegirRecepta(recepta);
             Intent returnIntent = new Intent();
@@ -61,10 +68,10 @@ public class NovaRecepta extends Activity {
         return true;
     }
 
-    public void obrir(View view)
+    public void seleccionarFoto(View view)
     {
         Intent intent = new Intent(this, FotosActivity.class);
-        startActivity(intent);
+        startActivityForResult(intent, 5);
     }
 
     @Override
@@ -109,5 +116,19 @@ public class NovaRecepta extends Activity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         Spinner sItems = (Spinner) findViewById(R.id.categoria);
         sItems.setAdapter(adapter);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if (requestCode == 5) {
+            if(resultCode == MainActivity.RESULT_OK){
+                String result = data.getStringExtra("result");
+                idDrawable = Integer.parseInt(result);
+                imatge.setImageResource(idDrawable);
+            }
+            if (resultCode == MainActivity.RESULT_CANCELED) {
+            }
+        }
     }
 }

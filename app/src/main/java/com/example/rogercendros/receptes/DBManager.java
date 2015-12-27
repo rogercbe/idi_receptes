@@ -25,6 +25,7 @@ public class DBManager extends SQLiteOpenHelper {
                 "_titol TEXT, " +
                 "_categoria TEXT, " +
                 "_descripcio TEXT," +
+                "_imatge INTEGER," +
                 "_data TIMESTAMP DEFAULT CURRENT_TIMESTAMP)";
         db.execSQL(queryReceptes);
 
@@ -55,6 +56,7 @@ public class DBManager extends SQLiteOpenHelper {
         valors.put("_titol", recepta.getTitol());
         valors.put("_categoria", recepta.getCategoria());
         valors.put("_descripcio", recepta.getDescripcio());
+        valors.put("_imatge", recepta.getImatge());
         db.insert("receptes", null, valors);
         db.close();
     }
@@ -79,12 +81,13 @@ public class DBManager extends SQLiteOpenHelper {
                 String titol = cursor.getString(cursor.getColumnIndex("_titol"));
                 String categoria = cursor.getString(cursor.getColumnIndex("_categoria"));
                 String descripcio = cursor.getString(cursor.getColumnIndex("_descripcio"));
+                int imatge = cursor.getInt(cursor.getColumnIndex("_imatge"));
                 recepta = new Recepta();
                 recepta.setId(id);
                 recepta.setTitol(titol);
                 recepta.setCategoria(categoria);
                 recepta.setDescripcio(descripcio);
-                recepta.setImatge(R.drawable.image);
+                recepta.setImatge(imatge);
             }
             cursor.close();
         }
@@ -107,7 +110,7 @@ public class DBManager extends SQLiteOpenHelper {
                 recepta.setTitol(c.getString(c.getColumnIndexOrThrow("_titol")));
                 recepta.setCategoria(c.getString(c.getColumnIndexOrThrow("_categoria")));
                 recepta.setDescripcio(c.getString(c.getColumnIndexOrThrow("_descripcio")));
-                recepta.setImatge(R.drawable.image);
+                recepta.setImatge(c.getInt(c.getColumnIndexOrThrow("_imatge")));
                 receptes.add(recepta);
             } while(c.moveToNext());
         }
