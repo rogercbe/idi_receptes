@@ -18,7 +18,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:layout_marginLeft="25dp"
+        android:layout_marginLeft="20dp"
         android:text="Large Text"
         android:id="@+id/titol"
         android:layout_toRightOf="@+id/imatge"/>
@@ -36,7 +36,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Descripció:"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="20dp"
         android:id="@+id/tDesc"
         android:layout_below="@+id/imatge" />
 
@@ -53,14 +53,14 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Ingredients:"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="20dp"
         android:id="@+id/tIng"
         android:layout_below="@+id/descripcio" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="25dp"
+        android:layout_marginLeft="20dp"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="Small Text"
         android:id="@+id/categoria"

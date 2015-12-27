@@ -6,5 +6,6 @@
     <string name="title_activity_recepta">ReceptaActivity</string>
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_nova_recepta">NovaRecepta</string>
+    <string name="title_activity_fotos">FotosActivity</string>
 
 </resources>

@@ -24,6 +24,10 @@
             android:name=".NovaRecepta"
             android:label="@string/title_activity_nova_recepta" >
         </activity>
+        <activity
+            android:name=".FotosActivity"
+            android:label="@string/title_activity_fotos" >
+        </activity>
     </application>
 
 </manifest>

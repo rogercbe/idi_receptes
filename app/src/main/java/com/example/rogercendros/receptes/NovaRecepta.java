@@ -61,6 +61,11 @@ public class NovaRecepta extends Activity {
         return true;
     }
 
+    public void obrir(View view)
+    {
+        Intent intent = new Intent(this, FotosActivity.class);
+        startActivity(intent);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

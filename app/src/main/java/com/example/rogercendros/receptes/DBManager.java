@@ -20,13 +20,25 @@ public class DBManager extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String query = "CREATE TABLE receptes (" +
+        String queryReceptes = "CREATE TABLE receptes (" +
                 "_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "_titol TEXT, " +
                 "_categoria TEXT, " +
                 "_descripcio TEXT," +
                 "_data TIMESTAMP DEFAULT CURRENT_TIMESTAMP)";
-        db.execSQL(query);
+        db.execSQL(queryReceptes);
+
+        String queryIngredients = "CREATE TABLE ingredients (" +
+                "_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                "_ingredient TEXT)";
+        db.execSQL(queryIngredients);
+
+        String queryAsso = "CREATE TABLE receptes_ingredients (" +
+                "_idRecepta INTEGER, " +
+                "_idIngredient INTEGER," +
+                "FOREIGN KEY(_idRecepta) REFERENCES receptes(_id)," +
+                "FOREIGN KEY(_idIngredient) REFERENCES ingredients(_id))";
+        db.execSQL(queryAsso);
     }
 
     @Override

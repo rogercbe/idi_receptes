@@ -32,4 +32,12 @@
         android:layout_alignParentBottom="true"
         android:onClick="afegirRecepta" />
 
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Foto"
+        android:id="@+id/btnFoto"
+        android:layout_alignParentBottom="true"
+        android:onClick="obrir" />
+
 </LinearLayout>
