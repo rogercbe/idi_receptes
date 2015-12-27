@@ -1,11 +1,13 @@
 package com.example.rogercendros.receptes;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -25,13 +27,15 @@ public class IngredientsActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ingredients);
 
-        llistaIngredients = new ArrayList<Ingredient>();
+        llistaIngredients = NovaRecepta.llistaIngredients;
 
         dbManager = new DBManager(this, null);
 
         llista = (ListView)findViewById(R.id.listView);
         adaptador = new IngredientsAdapter(this, dbManager.llegirIngredients());
         llista.setAdapter(adaptador);
+
+        inicialitzarChecks();
 
         // Event on click de la llista
         llista.setOnItemClickListener(
@@ -40,6 +44,10 @@ public class IngredientsActivity extends ActionBarActivity {
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         Ingredient ingredient = (Ingredient) adaptador.getItem(position);
                         toggleIngredient(ingredient);
+                        if (view != null) {
+                            CheckBox checkBox = (CheckBox)view.findViewById(R.id.checkbox);
+                            checkBox.setChecked(!checkBox.isChecked());
+                        }
                     }
                 }
         );
@@ -70,17 +78,35 @@ public class IngredientsActivity extends ActionBarActivity {
     public void toggleIngredient(Ingredient ingredient) {
         if(llistaIngredients.contains(ingredient)) {
             llistaIngredients.remove(ingredient);
-            Toast.makeText(IngredientsActivity.this, "estava i borrem", Toast.LENGTH_SHORT).show();
         } else {
             llistaIngredients.add(ingredient);
-            Toast.makeText(IngredientsActivity.this, "no estava afegim", Toast.LENGTH_SHORT).show();
         }
     }
 
     public void seleccionar(View view)
     {
-        int count = llistaIngredients.size();
-        String missatge = String.valueOf(count);
-        Toast.makeText(IngredientsActivity.this, missatge, Toast.LENGTH_SHORT).show();
+        Intent returnIntent = new Intent();
+        setResult(NovaRecepta.RESULT_OK, returnIntent);
+        finish();
+    }
+
+    public void inicialitzarChecks()
+    {
+        View v;
+        CheckBox checkbox;
+        for (int i = 0; i < llista.getCount(); i++) {
+            v = llista.getAdapter().getView(i, null, null);
+            checkbox = (CheckBox)v.findViewById(R.id.checkbox);
+            Ingredient ing = (Ingredient) adaptador.getItem(i);
+            if(llistaIngredients.contains(ing)) {
+                checkbox.setChecked(true);
+            }
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();  // Always call the superclass method first
+        inicialitzarChecks();
     }
 }

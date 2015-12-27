@@ -27,12 +27,15 @@ public class NovaRecepta extends Activity {
     private ImageView imatge;
     private int idDrawable;
     private SpinnerAdapter adaptador;
-
+    public static List llistaIngredients;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nova_recepta);
+
+        //Inicialitzar llista d'ingredients
+        llistaIngredients = new ArrayList<Ingredient>();
 
         idDrawable = R.drawable.defecte;
         titol = (EditText)findViewById(R.id.titol);
@@ -127,13 +130,20 @@ public class NovaRecepta extends Activity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
+        // Canviar imatge
         if (requestCode == 5) {
             if(resultCode == MainActivity.RESULT_OK){
                 String result = data.getStringExtra("result");
                 idDrawable = Integer.parseInt(result);
                 imatge.setImageResource(idDrawable);
             }
-            if (resultCode == MainActivity.RESULT_CANCELED) {
+        }
+        // Seleccionar ingredients
+        if (requestCode == 10) {
+            if(resultCode == MainActivity.RESULT_OK){
+                // actualitzar llista ingredients
+                String count = String.valueOf(llistaIngredients.size());
+                Toast.makeText(NovaRecepta.this, count, Toast.LENGTH_SHORT).show();
             }
         }
     }

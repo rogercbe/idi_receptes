@@ -138,4 +138,5 @@ public class EditarRecepta extends ActionBarActivity {
         Spinner sItems = (Spinner) findViewById(R.id.categoria);
         sItems.setAdapter(adapter);
     }
+
 }
