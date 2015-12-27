@@ -28,9 +28,34 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Medium Text"
-        android:layout_marginTop="25dp"
         android:id="@+id/descripcio"
+        android:layout_below="@+id/tDesc" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Descripció:"
+        android:layout_marginTop="25dp"
+        android:id="@+id/tDesc"
         android:layout_below="@+id/imatge" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Medium Text"
+        android:id="@+id/ingredients"
+        android:layout_below="@+id/tIng" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Ingredients:"
+        android:layout_marginTop="25dp"
+        android:id="@+id/tIng"
+        android:layout_below="@+id/descripcio" />
 
     <TextView
         android:layout_width="wrap_content"
