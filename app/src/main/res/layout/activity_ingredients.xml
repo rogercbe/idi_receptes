@@ -18,6 +18,7 @@
         android:layout_height="wrap_content"
         android:text="Seleccionar"
         android:id="@+id/acceptar"
+        android:onClick="seleccionar"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true" />
 

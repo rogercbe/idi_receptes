@@ -70,8 +70,17 @@ public class IngredientsActivity extends ActionBarActivity {
     public void toggleIngredient(Ingredient ingredient) {
         if(llistaIngredients.contains(ingredient)) {
             llistaIngredients.remove(ingredient);
+            Toast.makeText(IngredientsActivity.this, "estava i borrem", Toast.LENGTH_SHORT).show();
         } else {
             llistaIngredients.add(ingredient);
+            Toast.makeText(IngredientsActivity.this, "no estava afegim", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    public void seleccionar(View view)
+    {
+        int count = llistaIngredients.size();
+        String missatge = String.valueOf(count);
+        Toast.makeText(IngredientsActivity.this, missatge, Toast.LENGTH_SHORT).show();
     }
 }
