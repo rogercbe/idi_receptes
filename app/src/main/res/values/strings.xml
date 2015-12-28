@@ -9,5 +9,6 @@
     <string name="title_activity_fotos">FotosActivity</string>
     <string name="title_activity_editar_recepta">EditarRecepta</string>
     <string name="title_activity_ingredients">IngredientsActivity</string>
+    <string name="title_activity_edit_ingredients">EditIngredientsActivity</string>
 
 </resources>

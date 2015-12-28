@@ -81,6 +81,13 @@ public class DBManager extends SQLiteOpenHelper {
         db.execSQL("DELETE FROM receptes WHERE _id = " + id);
     }
 
+    // Esborrar ingredients d'una recepta
+    public void esborrarIngredientsDeRecepta(int id)
+    {
+        SQLiteDatabase db = getWritableDatabase();
+        db.execSQL("DELETE FROM receptes_ingredients WHERE _idRecepta = " + id);
+    }
+
     public Recepta llegirReceptaPerId(int _id)
     {
         SQLiteDatabase db = getWritableDatabase();
@@ -140,6 +147,28 @@ public class DBManager extends SQLiteOpenHelper {
         SQLiteDatabase db = getWritableDatabase();
         //query("table", tableColumns, whereClause, whereArgs, null, null, orderBy);
         Cursor c = db.query("ingredients", null, null, null, null, null, "_ingredient ASC");
+
+        if (c.moveToFirst()) {
+            do {
+                Ingredient ingredient = new Ingredient();
+                ingredient.setId(c.getInt(c.getColumnIndexOrThrow("_id")));
+                ingredient.setNom(c.getString(c.getColumnIndexOrThrow("_ingredient")));
+                ingredients.add(ingredient);
+            } while(c.moveToNext());
+        }
+
+        if (c != null && c.isClosed()) c.close();
+
+        return ingredients;
+    }
+
+    public List llegirIngredientsDeRecepta(int id)
+    {
+        List ingredients = new ArrayList<Ingredient>();
+        SQLiteDatabase db = getWritableDatabase();
+        //query("table", tableColumns, whereClause, whereArgs, null, null, orderBy);
+        String query = "SELECT * FROM receptes_ingredients a JOIN ingredients b ON a._idIngredient=b._id WHERE a._idRecepta="+id;
+        Cursor c = db.rawQuery(query, null);
 
         if (c.moveToFirst()) {
             do {

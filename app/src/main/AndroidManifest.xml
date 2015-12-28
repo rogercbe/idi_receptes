@@ -36,6 +36,10 @@
             android:name=".IngredientsActivity"
             android:label="@string/title_activity_ingredients" >
         </activity>
+        <activity
+            android:name=".EditIngredientsActivity"
+            android:label="@string/title_activity_edit_ingredients" >
+        </activity>
     </application>
 
 </manifest>

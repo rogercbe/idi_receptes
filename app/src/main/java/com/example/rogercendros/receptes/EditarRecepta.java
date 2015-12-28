@@ -26,6 +26,7 @@ public class EditarRecepta extends ActionBarActivity {
     private EditText descripcio;
     private int idDrawable;
     private Recepta recepta;
+    public static List llistaIngredients;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +41,8 @@ public class EditarRecepta extends ActionBarActivity {
         int id = bundle.getInt("id");
 
         recepta = dbManager.llegirReceptaPerId(id);
+        llistaIngredients = dbManager.llegirIngredientsDeRecepta(id);
+        //llistaIngredients = new ArrayList<Ingredient>();
 
         titol = (EditText)findViewById(R.id.titol);
         categoria = (Spinner)findViewById(R.id.categoria);
@@ -84,6 +87,8 @@ public class EditarRecepta extends ActionBarActivity {
         recepta.setImatge(idDrawable);
         if(esValid()) {
             dbManager.actualitzarRecepta(recepta);
+            dbManager.esborrarIngredientsDeRecepta(recepta.getId());
+            dbManager.afegirIngredientsARecepta(recepta.getId(), llistaIngredients);
             Intent returnIntent = new Intent();
             setResult(ReceptaActivity.RESULT_OK, returnIntent);
             finish();
@@ -101,6 +106,12 @@ public class EditarRecepta extends ActionBarActivity {
     {
         Intent intent = new Intent(this, FotosActivity.class);
         startActivityForResult(intent, 6);
+    }
+
+    public void seleccionarIngredients(View view)
+    {
+        Intent intent = new Intent(this, EditIngredientsActivity.class);
+        startActivityForResult(intent, 15);
     }
 
     @Override
