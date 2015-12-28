@@ -87,15 +87,12 @@ public class ReceptaActivity extends ActionBarActivity {
         dbManager = new DBManager(this, null);
 
         recepta = dbManager.llegirReceptaPerId(recepta.getId());
-
-        titol = (TextView)findViewById(R.id.titol);
-        categoria = (TextView)findViewById(R.id.categoria);
-        descripcio = (TextView)findViewById(R.id.descripcio);
-        imatge = (ImageView)findViewById(R.id.imatge);
+        llista = dbManager.getLlistaIngredients(recepta.getId());
 
         titol.setText(recepta.getTitol());
         categoria.setText(recepta.getCategoria());
         descripcio.setText(recepta.getDescripcio());
+        ingredients.setText(llista);
         imatge.setImageResource(recepta.getImatge());
     }
 
