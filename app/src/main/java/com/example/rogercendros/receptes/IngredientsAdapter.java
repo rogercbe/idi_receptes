@@ -12,8 +12,12 @@ import java.util.List;
 
 class IngredientsAdapter extends ArrayAdapter<Ingredient> {
 
+    private List llista;
+
     public IngredientsAdapter(Context context, List<Ingredient> objects) {
         super(context, 0, objects);
+
+        llista = objects;
     }
 
     @Override
@@ -36,6 +40,18 @@ class IngredientsAdapter extends ArrayAdapter<Ingredient> {
         Ingredient ingredient = getItem(position);
         txtIngredient.setText(ingredient.getNom());
 
+        boolean valor = NovaRecepta.llistaIngredients.contains(ingredient);
+        txtIngredient.setChecked(valor);
+
         return listItemView;
     }
+
+    /*
+    public void setChecked(int pos, boolean value, View v)
+    {
+        CheckBox prova = (CheckBox)v.findViewById(R.id.checkbox);
+        prova.setText("Hi! I updated you manually!");
+    }
+    */
+
 }

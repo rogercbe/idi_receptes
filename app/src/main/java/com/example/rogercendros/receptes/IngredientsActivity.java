@@ -3,6 +3,7 @@ package com.example.rogercendros.receptes;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -35,7 +36,9 @@ public class IngredientsActivity extends ActionBarActivity {
         adaptador = new IngredientsAdapter(this, dbManager.llegirIngredients());
         llista.setAdapter(adaptador);
 
-        inicialitzarChecks();
+        View v = llista.getAdapter().getView(1, null, null);
+        CheckBox checkbox = (CheckBox)v.findViewById(R.id.checkbox);
+        checkbox.setChecked(true);
 
         // Event on click de la llista
         llista.setOnItemClickListener(
@@ -97,9 +100,12 @@ public class IngredientsActivity extends ActionBarActivity {
         for (int i = 0; i < llista.getCount(); i++) {
             v = llista.getAdapter().getView(i, null, null);
             checkbox = (CheckBox)v.findViewById(R.id.checkbox);
+
             Ingredient ing = (Ingredient) adaptador.getItem(i);
+
             if(llistaIngredients.contains(ing)) {
                 checkbox.setChecked(true);
+                adaptador.notifyDataSetChanged();
             }
         }
     }
@@ -107,6 +113,5 @@ public class IngredientsActivity extends ActionBarActivity {
     @Override
     public void onResume() {
         super.onResume();  // Always call the superclass method first
-        inicialitzarChecks();
     }
 }

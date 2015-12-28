@@ -49,7 +49,7 @@ public class DBManager extends SQLiteOpenHelper {
     }
 
     // Afegir una nova recepta
-    public void afegirRecepta(Recepta recepta)
+    public int afegirRecepta(Recepta recepta)
     {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues valors = new ContentValues();
@@ -57,8 +57,9 @@ public class DBManager extends SQLiteOpenHelper {
         valors.put("_categoria", recepta.getCategoria());
         valors.put("_descripcio", recepta.getDescripcio());
         valors.put("_imatge", recepta.getImatge());
-        db.insert("receptes", null, valors);
+        long id = db.insert("receptes", null, valors);
         db.close();
+        return (int)id;
     }
 
     public void actualitzarRecepta(Recepta recepta)
@@ -162,6 +163,47 @@ public class DBManager extends SQLiteOpenHelper {
         valors.put("_ingredient", ingredient);
         db.insert("ingredients", null, valors);
         db.close();
+    }
+
+    public void afegirIngredientsARecepta(int id, List ingredients)
+    {
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues valors = new ContentValues();
+        Ingredient ing;
+
+        for (int i = 0; i < ingredients.size(); ++i) {
+            ing = (Ingredient)ingredients.get(i);
+            valors.put("_idRecepta", id);
+            valors.put("_idIngredient", ing.getId());
+            db.insert("receptes_ingredients", null, valors);
+        }
+
+        db.close();
+    }
+
+    //String amb tots els ingredients donat una recepta
+    public String getLlistaIngredients(int id)
+    {
+        String llista = "";
+        SQLiteDatabase db = getWritableDatabase();
+        //query("table", tableColumns, whereClause, whereArgs, null, null, orderBy);
+        String query = "SELECT * FROM receptes_ingredients a JOIN ingredients b ON a._idIngredient=b._id WHERE a._idRecepta="+id;
+        Cursor c = db.rawQuery(query, null);
+        //Cursor c = db.query("receptes_ingredients", null, "_idRecepta = " + id, null, null, null, null);
+
+        if (c.moveToFirst()) {
+            do {
+                llista += c.getString(c.getColumnIndexOrThrow("_ingredient")) + ", ";
+            } while(c.moveToNext());
+        }
+
+        if (c != null && c.isClosed()) c.close();
+
+        //treure la ultima coma i posar un punt, tot en minúscules menys la primera.
+        if (llista == "") return "Aquesta recepta no te ingredients afegits!";
+        llista.toLowerCase();
+        llista = llista.substring(0, llista.length()-2) + ".";
+        return llista.substring(0, 1).toUpperCase() + llista.substring(1);
     }
 }
 

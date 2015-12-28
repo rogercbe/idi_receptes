@@ -56,8 +56,9 @@ public class NovaRecepta extends Activity {
         recepta.setCategoria(categoria.getSelectedItem().toString());
         recepta.setDescripcio(descripcio.getText().toString());
         recepta.setImatge(idDrawable);
-        if(esValid()) {
-            dbManager.afegirRecepta(recepta);
+        if (esValid()) {
+            int id = dbManager.afegirRecepta(recepta);
+            dbManager.afegirIngredientsARecepta(id, llistaIngredients);
             Intent returnIntent = new Intent();
             setResult(MainActivity.RESULT_OK, returnIntent);
             finish();
@@ -67,7 +68,7 @@ public class NovaRecepta extends Activity {
 
     public boolean esValid()
     {
-        if(titol.getText().toString().isEmpty() || categoria.getSelectedItem().toString().isEmpty() || descripcio.getText().toString().isEmpty()) return false;
+        if (titol.getText().toString().isEmpty() || categoria.getSelectedItem().toString().isEmpty() || descripcio.getText().toString().isEmpty()) return false;
         return true;
     }
 
@@ -142,8 +143,8 @@ public class NovaRecepta extends Activity {
         if (requestCode == 10) {
             if(resultCode == MainActivity.RESULT_OK){
                 // actualitzar llista ingredients
-                String count = String.valueOf(llistaIngredients.size());
-                Toast.makeText(NovaRecepta.this, count, Toast.LENGTH_SHORT).show();
+                //String count = String.valueOf(llistaIngredients.size());
+                //Toast.makeText(NovaRecepta.this, count, Toast.LENGTH_SHORT).show();
             }
         }
     }

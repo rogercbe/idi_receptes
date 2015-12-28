@@ -20,7 +20,9 @@ public class ReceptaActivity extends ActionBarActivity {
     private TextView titol;
     private TextView categoria;
     private TextView descripcio;
+    private TextView ingredients;
     private Recepta recepta;
+    private String llista;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,15 +34,18 @@ public class ReceptaActivity extends ActionBarActivity {
         int id = bundle.getInt("id");
 
         recepta = dbManager.llegirReceptaPerId(id);
+        llista = dbManager.getLlistaIngredients(id);
 
         titol = (TextView)findViewById(R.id.titol);
         categoria = (TextView)findViewById(R.id.categoria);
         descripcio = (TextView)findViewById(R.id.descripcio);
+        ingredients = (TextView)findViewById(R.id.ingredients);
         imatge = (ImageView)findViewById(R.id.imatge);
 
         titol.setText(recepta.getTitol());
         categoria.setText(recepta.getCategoria());
         descripcio.setText(recepta.getDescripcio());
+        ingredients.setText(llista);
         imatge.setImageResource(recepta.getImatge());
     }
 
