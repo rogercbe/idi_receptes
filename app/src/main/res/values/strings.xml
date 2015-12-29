@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Llibre de receptes</string>
+    <string name="app_name">Receptari</string>
     <string name="action_settings">Settings</string>
-    <string name="title_activity_recepta">ReceptaActivity</string>
-    <string name="hello_world">Hello world!</string>
-    <string name="title_activity_nova_recepta">NovaRecepta</string>
-    <string name="title_activity_fotos">FotosActivity</string>
-    <string name="title_activity_editar_recepta">EditarRecepta</string>
-    <string name="title_activity_ingredients">IngredientsActivity</string>
-    <string name="title_activity_edit_ingredients">EditIngredientsActivity</string>
+    <string name="title_activity_recepta">Receptari</string>
+    <string name="title_activity_nova_recepta">Receptari</string>
+    <string name="title_activity_fotos">Receptari</string>
+    <string name="title_activity_editar_recepta">Receptari</string>
+    <string name="title_activity_ingredients">Receptari</string>
+    <string name="title_activity_edit_ingredients">Receptari</string>
 
 </resources>

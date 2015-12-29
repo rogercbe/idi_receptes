@@ -42,7 +42,6 @@ public class EditarRecepta extends ActionBarActivity {
 
         recepta = dbManager.llegirReceptaPerId(id);
         llistaIngredients = dbManager.llegirIngredientsDeRecepta(id);
-        //llistaIngredients = new ArrayList<Ingredient>();
 
         titol = (EditText)findViewById(R.id.titol);
         categoria = (Spinner)findViewById(R.id.categoria);
@@ -72,7 +71,8 @@ public class EditarRecepta extends ActionBarActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.enrera) {
+            finish();
             return true;
         }
 

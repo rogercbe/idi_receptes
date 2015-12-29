@@ -1,5 +1,7 @@
 package com.example.rogercendros.receptes;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -69,7 +71,22 @@ public class MainActivity extends ActionBarActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        /*if (id == R.id.action_settings) {
+            return true;
+        }*/
+
+        if (id == R.id.buscar) {
+            buscar();
+            return true;
+        }
+
+        if (id == R.id.help) {
+            help();
+            return true;
+        }
+
+        if (id == R.id.about) {
+            about();
             return true;
         }
 
@@ -109,5 +126,55 @@ public class MainActivity extends ActionBarActivity {
         bundle.putInt("id", id);
         i.putExtras(bundle);
         startActivity(i);
+    }
+
+    public void about(View view)
+    {
+        AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
+        alertDialog.setTitle("Alert");
+        alertDialog.setMessage("Alert message to be shown");
+        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+        alertDialog.show();
+    }
+
+    public void about()
+    {
+        AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
+        alertDialog.setTitle("About");
+        alertDialog.setMessage("'Receptari' és un llibre de receptes virtual per guardar les teves receptes preferides i poder accedir a elles fàcilment.\n\nAquesta aplicació és un projecte per l'assignatura d'IDI de la FIB. \n\nAutor: Roger Cendrós.\nAquesta és la versió 1.0.");
+        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "D'ACORD",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+        alertDialog.show();
+    }
+
+    public void help()
+    {
+        AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
+        alertDialog.setTitle("Ajuda");
+        alertDialog.setMessage("Aquesta aplicació permet gestionar un llibre de receptes virtual.\n\nPots afegir noves receptes prement el botó '+' de la pàgina principal. " +
+                "Si necessites editar-les o esborrar-les o fins i tot substituir ingredients d'una recepta, desde la pàgina de cada recepta ho podràs fer ràpidament.\n\nFinalment pots utilitzar el buscador del menú" +
+                " per filtrar totes les receptes i buscar la que més t'interessi aplicant els filtres convenients!\n\n" +
+                "Fàcil, oi?");
+        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "GRÀCIES",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+        alertDialog.show();
+    }
+
+    public void buscar()
+    {
+
     }
 }

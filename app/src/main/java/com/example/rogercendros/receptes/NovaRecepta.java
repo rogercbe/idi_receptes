@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class NovaRecepta extends Activity {
+public class NovaRecepta extends ActionBarActivity {
 
     private DBManager dbManager;
     private EditText titol;
@@ -99,7 +99,8 @@ public class NovaRecepta extends Activity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.enrera) {
+            finish();
             return true;
         }
 
