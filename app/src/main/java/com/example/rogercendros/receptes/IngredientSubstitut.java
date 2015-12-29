@@ -1,5 +1,6 @@
 package com.example.rogercendros.receptes;
 
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -24,6 +25,9 @@ public class IngredientSubstitut extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ingredient_substitut);
 
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+
         original = (Spinner)findViewById(R.id.original);
         substitut = (Spinner)findViewById(R.id.substitut);
 
@@ -47,11 +51,6 @@ public class IngredientSubstitut extends ActionBarActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
 
         return super.onOptionsItemSelected(item);
     }

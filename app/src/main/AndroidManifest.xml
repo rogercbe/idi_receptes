@@ -18,10 +18,13 @@
         </activity>
         <activity
             android:name=".ReceptaActivity"
+            android:parentActivityName=".MainActivity"
+            android:launchMode="singleTop"
             android:label="@string/title_activity_recepta" >
         </activity>
         <activity
             android:name=".NovaRecepta"
+            android:parentActivityName=".MainActivity"
             android:label="@string/title_activity_nova_recepta" >
         </activity>
         <activity
@@ -30,17 +33,23 @@
         </activity>
         <activity
             android:name=".EditarRecepta"
+            android:launchMode="singleTop"
+            android:parentActivityName=".ReceptaActivity"
             android:label="@string/title_activity_editar_recepta" >
         </activity>
         <activity
             android:name=".IngredientsActivity"
+            android:parentActivityName=".NovaRecepta"
             android:label="@string/title_activity_ingredients" >
         </activity>
         <activity
             android:name=".EditIngredientsActivity"
+            android:parentActivityName=".EditarRecepta"
             android:label="@string/title_activity_edit_ingredients" >
         </activity>
         <activity
+            android:parentActivityName=".NovaRecepta"
+            android:launchMode="singleTop"
             android:name=".IngredientSubstitut"
             android:label="@string/title_activity_ingredient_substitut" >
         </activity>

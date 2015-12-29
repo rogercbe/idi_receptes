@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.Image;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -30,6 +31,10 @@ public class ReceptaActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recepta);
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+
         dbManager = new DBManager(this, null);
 
         Bundle bundle = getIntent().getExtras();
@@ -130,7 +135,8 @@ public class ReceptaActivity extends ActionBarActivity {
                 Intent returnIntent = new Intent();
                 setResult(MainActivity.RESULT_OK, returnIntent);
                 finish();
-            } });
+            }
+        });
         adb.setNegativeButton("CANCEL·LAR", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();

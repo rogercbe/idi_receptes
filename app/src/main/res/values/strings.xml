@@ -3,13 +3,13 @@
 
     <string name="app_name">Receptari</string>
     <string name="action_settings">Settings</string>
-    <string name="title_activity_recepta">Receptari</string>
-    <string name="title_activity_nova_recepta">Receptari</string>
-    <string name="title_activity_fotos">Receptari</string>
-    <string name="title_activity_editar_recepta">Receptari</string>
-    <string name="title_activity_ingredients">Receptari</string>
-    <string name="title_activity_edit_ingredients">Receptari</string>
-    <string name="title_activity_ingredient_substitut">IngredientSubstitut</string>
+    <string name="title_activity_recepta">La Meva Recepta</string>
+    <string name="title_activity_nova_recepta">Nova Recepta</string>
+    <string name="title_activity_fotos">Galeria</string>
+    <string name="title_activity_editar_recepta">Editar Recepta</string>
+    <string name="title_activity_ingredients">Seleccionar Ingredients</string>
+    <string name="title_activity_edit_ingredients">Seleccionar Ingredients</string>
+    <string name="title_activity_ingredient_substitut">Ingredients Alternatius</string>
     <string name="hello_world">Hello world!</string>
 
 </resources>

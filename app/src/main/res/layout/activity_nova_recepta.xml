@@ -28,7 +28,7 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Descripció"
+        android:hint="El·laboració"
         android:id="@+id/descripcio"
         android:layout_marginTop="20dp"
         android:layout_below="@+id/categoria"
@@ -54,7 +54,7 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Substituir Ingredients"
+        android:text="Ingredients Alternatius"
         android:id="@+id/btnSubstituts"
         android:onClick="seleccionarSubstituts"
         android:layout_below="@+id/btnSeleccionar" />
