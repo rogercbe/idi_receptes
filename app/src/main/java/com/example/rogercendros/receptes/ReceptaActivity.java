@@ -1,5 +1,7 @@
 package com.example.rogercendros.receptes;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.Image;
 import android.support.v7.app.ActionBarActivity;
@@ -65,14 +67,19 @@ public class ReceptaActivity extends ActionBarActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        /*if (id == R.id.action_settings) {
+        if (id == R.id.editar) {
+            onButtonClick();
             return true;
-        }*/
+        }
+        if(id == R.id.esborrar) {
+            suprimir();
+            return true;
+        }
 
         return super.onOptionsItemSelected(item);
     }
 
-    public void onButtonClick(View view)
+    public void onButtonClick()
     {
         Intent i = new Intent(this, EditarRecepta.class);
         Bundle bundle = new Bundle();
@@ -106,5 +113,28 @@ public class ReceptaActivity extends ActionBarActivity {
             if (resultCode == ReceptaActivity.RESULT_CANCELED) {
             }
         }
+    }
+
+    public void suprimir()
+    {
+        AlertDialog.Builder adb = new AlertDialog.Builder(this);
+        adb.setTitle("Esborrar Recepta");
+        adb.setMessage("Segur que vols esborrar aquesta recepta: "+recepta.getTitol()+"?");
+        adb.setPositiveButton("D'ACORD", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                // esborrar ingredients de la recepta id
+                dbManager.esborrarIngredientsDeRecepta(recepta.getId());
+                // esborrar recepta id
+                dbManager.esborrarRecepta(recepta.getId());
+                // tornar amb resultat ok
+                Intent returnIntent = new Intent();
+                setResult(MainActivity.RESULT_OK, returnIntent);
+                finish();
+            } });
+        adb.setNegativeButton("CANCEL·LAR", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            } });
+        adb.show();
     }
 }

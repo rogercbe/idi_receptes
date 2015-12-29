@@ -117,6 +117,11 @@ public class MainActivity extends ActionBarActivity {
             if (resultCode == MainActivity.RESULT_CANCELED) {
             }
         }
+        if (requestCode == 20) {
+            if(resultCode == MainActivity.RESULT_OK){
+                Toast.makeText(MainActivity.this, "S'ha eliminat la recepta!", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 
     public void obrirDetall(int id)
@@ -125,7 +130,7 @@ public class MainActivity extends ActionBarActivity {
         Bundle bundle = new Bundle();
         bundle.putInt("id", id);
         i.putExtras(bundle);
-        startActivity(i);
+        startActivityForResult(i, 20);
     }
 
     public void about(View view)
@@ -161,7 +166,7 @@ public class MainActivity extends ActionBarActivity {
         AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
         alertDialog.setTitle("Ajuda");
         alertDialog.setMessage("Aquesta aplicació permet gestionar un llibre de receptes virtual.\n\nPots afegir noves receptes prement el botó '+' de la pàgina principal. " +
-                "Si necessites editar-les o esborrar-les o fins i tot substituir ingredients d'una recepta, desde la pàgina de cada recepta ho podràs fer ràpidament.\n\nFinalment pots utilitzar el buscador del menú" +
+                "Si necessites visualitzar-les en detall, editar-les o esborrar-les o fins i tot substituir ingredients d'una recepta, podràs fer ràpidament prement a una recepta de la llista.\n\nFinalment pots utilitzar el buscador del menú" +
                 " per filtrar totes les receptes i buscar la que més t'interessi aplicant els filtres convenients!\n\n" +
                 "Fàcil, oi?");
         alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "GRÀCIES",
