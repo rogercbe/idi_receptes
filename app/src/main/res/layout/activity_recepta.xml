@@ -35,7 +35,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Descripció:"
+        android:text="El·laboració:"
         android:layout_marginTop="20dp"
         android:id="@+id/tDesc"
         android:layout_below="@+id/imatge" />
@@ -66,5 +66,22 @@
         android:id="@+id/categoria"
         android:layout_toRightOf="@+id/imatge"
         android:layout_below="@+id/titol"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Ingredients Alternatius:"
+        android:layout_marginTop="20dp"
+        android:id="@+id/tAlt"
+        android:layout_below="@+id/ingredients" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Medium Text"
+        android:id="@+id/alternatius"
+        android:layout_below="@+id/tAlt" />
 
 </RelativeLayout>

@@ -106,10 +106,4 @@ public class IngredientSubstitut extends ActionBarActivity {
         Toast.makeText(IngredientSubstitut.this, "Afegit "+nou.getNom()+" com a substitut de "+ori.getNom()+"!", Toast.LENGTH_SHORT).show();
         // mostrar en una llista les substitucions
     }
-
-    public void acceptar(View v)
-    {
-        if (NovaRecepta.llistaSubstituts.size() > 0) Toast.makeText(IngredientSubstitut.this, "S'han afegit els substitus als ingredients!", Toast.LENGTH_SHORT).show();
-        finish();
-    }
 }

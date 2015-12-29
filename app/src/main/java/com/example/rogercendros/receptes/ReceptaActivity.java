@@ -15,6 +15,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class ReceptaActivity extends ActionBarActivity {
 
@@ -24,8 +27,10 @@ public class ReceptaActivity extends ActionBarActivity {
     private TextView categoria;
     private TextView descripcio;
     private TextView ingredients;
+    private TextView alternatius;
     private Recepta recepta;
     private String llista;
+    private List llistaAlternatius;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,11 +47,13 @@ public class ReceptaActivity extends ActionBarActivity {
 
         recepta = dbManager.llegirReceptaPerId(id);
         llista = dbManager.getLlistaIngredients(id);
+        llistaAlternatius = dbManager.llegirSubstitutsDeRecepta(id);
 
         titol = (TextView)findViewById(R.id.titol);
         categoria = (TextView)findViewById(R.id.categoria);
         descripcio = (TextView)findViewById(R.id.descripcio);
         ingredients = (TextView)findViewById(R.id.ingredients);
+        alternatius = (TextView)findViewById(R.id.alternatius);
         imatge = (ImageView)findViewById(R.id.imatge);
 
         titol.setText(recepta.getTitol());
@@ -54,6 +61,7 @@ public class ReceptaActivity extends ActionBarActivity {
         descripcio.setText(recepta.getDescripcio());
         ingredients.setText(llista);
         imatge.setImageResource(recepta.getImatge());
+        initAlternatius();
     }
 
 
@@ -100,12 +108,14 @@ public class ReceptaActivity extends ActionBarActivity {
 
         recepta = dbManager.llegirReceptaPerId(recepta.getId());
         llista = dbManager.getLlistaIngredients(recepta.getId());
+        llistaAlternatius = dbManager.llegirSubstitutsDeRecepta(recepta.getId());
 
         titol.setText(recepta.getTitol());
         categoria.setText(recepta.getCategoria());
         descripcio.setText(recepta.getDescripcio());
         ingredients.setText(llista);
         imatge.setImageResource(recepta.getImatge());
+        initAlternatius();
     }
 
     @Override
@@ -142,5 +152,21 @@ public class ReceptaActivity extends ActionBarActivity {
                 dialog.dismiss();
             } });
         adb.show();
+    }
+
+    public void initAlternatius()
+    {
+        Substitut s;
+        String vell, nou;
+        String llista = "";
+        for(int i = 0; i < llistaAlternatius.size(); ++i) {
+            s = (Substitut)llistaAlternatius.get(i);
+            vell = dbManager.getIngredientById(s.getIdOriginal()).getNom();
+            nou = dbManager.getIngredientById(s.getIdNou()).getNom();
+            llista += nou + " pot substituir " + vell + "\n";
+        }
+
+        alternatius.setText(llista);
+
     }
 }

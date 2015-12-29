@@ -272,6 +272,47 @@ public class DBManager extends SQLiteOpenHelper {
             afegirIngredient(ingredients[i]);
         }
     }
+
+    public Ingredient getIngredientById(int id) {
+        SQLiteDatabase db = getWritableDatabase();
+        //query("table", tableColumns, whereClause, whereArgs, null, null, orderBy);
+        String query = "SELECT * FROM ingredients WHERE _id="+id;
+        Cursor c = db.rawQuery(query, null);
+        Ingredient ingredient = new Ingredient();
+
+        if (c.moveToFirst()) {
+            do {
+                ingredient.setId(c.getInt((c.getColumnIndexOrThrow("_id"))));
+                ingredient.setNom(c.getString(c.getColumnIndexOrThrow("_ingredient")));
+            } while(c.moveToNext());
+        }
+
+        if (c != null && c.isClosed()) c.close();
+
+        return ingredient;
+    }
+
+    public List llegirSubstitutsDeRecepta(int id)
+    {
+        List ingredients = new ArrayList<Substitut>();
+        SQLiteDatabase db = getWritableDatabase();
+        //query("table", tableColumns, whereClause, whereArgs, null, null, orderBy);
+        String query = "SELECT * FROM substitucions WHERE _idRecepta="+id;
+        Cursor c = db.rawQuery(query, null);
+
+        if (c.moveToFirst()) {
+            do {
+                int idNou = c.getInt(c.getColumnIndexOrThrow("_idNou"));
+                int idOriginal = c.getInt(c.getColumnIndexOrThrow("_idOriginal"));
+                Substitut ingredient = new Substitut(idOriginal, idNou);
+                ingredients.add(ingredient);
+            } while(c.moveToNext());
+        }
+
+        if (c != null && c.isClosed()) c.close();
+
+        return ingredients;
+    }
 }
 
 
