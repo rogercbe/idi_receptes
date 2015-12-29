@@ -25,4 +25,16 @@ public class Substitut {
     public void setIdNou(int idNou) {
         this.idNou = idNou;
     }
+
+    @Override
+    public boolean equals(Object v) {
+        boolean retVal = false;
+
+        if (v instanceof Substitut){
+            Substitut i = (Substitut) v;
+            retVal = (i.idNou == this.idNou && i.idOriginal == this.idOriginal);
+        }
+
+        return retVal;
+    }
 }
