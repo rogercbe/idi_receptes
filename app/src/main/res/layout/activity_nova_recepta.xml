@@ -54,6 +54,14 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:text="Substituir Ingredients"
+        android:id="@+id/btnSubstituts"
+        android:onClick="seleccionarSubstituts"
+        android:layout_below="@+id/btnSeleccionar" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:text="Canviar Imatge"
         android:id="@+id/btnFoto"
         android:onClick="seleccionarFoto"

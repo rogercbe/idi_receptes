@@ -40,6 +40,16 @@ public class DBManager extends SQLiteOpenHelper {
                 "FOREIGN KEY(_idRecepta) REFERENCES receptes(_id)," +
                 "FOREIGN KEY(_idIngredient) REFERENCES ingredients(_id))";
         db.execSQL(queryAsso);
+
+        String querySubs = "CREATE TABLE substitucions (" +
+                "_idRecepta INTEGER, " +
+                "_idOriginal INTEGER," +
+                "_idNou INTEGER," +
+                "FOREIGN KEY(_idRecepta) REFERENCES receptes(_id)," +
+                "FOREIGN KEY(_idOriginal) REFERENCES ingredients(_id)," +
+                "FOREIGN KEY(_idNou) REFERENCES ingredients(_id))";
+        db.execSQL(querySubs);
+
     }
 
     @Override
@@ -233,6 +243,34 @@ public class DBManager extends SQLiteOpenHelper {
         llista.toLowerCase();
         llista = llista.substring(0, llista.length()-2) + ".";
         return llista.substring(0, 1).toUpperCase() + llista.substring(1);
+    }
+
+    public void afegirIngredientsSubstituts(int id, List ingredients)
+    {
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues valors = new ContentValues();
+        Substitut ing;
+
+        for (int i = 0; i < ingredients.size(); ++i) {
+            ing = (Substitut)ingredients.get(i);
+            valors.put("_idRecepta", id);
+            valors.put("_idOriginal", ing.getIdOriginal());
+            valors.put("_idNou", ing.getIdNou());
+            db.insert("substitucions", null, valors);
+        }
+
+        db.close();
+    }
+
+    public void seedIngredients()
+    {
+        String[] ingredients = {"Enciam", "Sal", "Sucre", "Patates", "Pollastre", "Pebre", "Llimona", "Pebrot", "Arros", "Macarrons",
+        "Espaguetis", "Orenga", "Ous", "Llet", "Aigua", "Farina", "Llevat", "Xocolata", "Galetes", "Cervesa", "Vi", "Fruits Secs", "Vinagre", "Oli",
+        "Llobarro", "Vedella", "Porc", "Galets", "Turrons", "Castanyes", "Pastanaga", "Mongetes", "Cava", "Cola", "Caldo", "Gambes", "Sardina", "Butifarra" };
+
+        for(int i = 0; i < ingredients.length; ++i) {
+            afegirIngredient(ingredients[i]);
+        }
     }
 }
 

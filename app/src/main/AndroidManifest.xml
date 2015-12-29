@@ -40,6 +40,10 @@
             android:name=".EditIngredientsActivity"
             android:label="@string/title_activity_edit_ingredients" >
         </activity>
+        <activity
+            android:name=".IngredientSubstitut"
+            android:label="@string/title_activity_ingredient_substitut" >
+        </activity>
     </application>
 
 </manifest>

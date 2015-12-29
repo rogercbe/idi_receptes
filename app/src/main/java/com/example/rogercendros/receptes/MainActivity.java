@@ -30,6 +30,8 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
         dbManager = new DBManager(this, null);
 
+        if (dbManager.llegirIngredients().size() == 0); dbManager.seedIngredients();
+
         // Carregar la llista
         list = (ListView)findViewById(R.id.llista);
         //adaptador = new LlistaReceptaAdapter(this, DataSource.receptes);

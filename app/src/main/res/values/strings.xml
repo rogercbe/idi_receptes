@@ -9,5 +9,7 @@
     <string name="title_activity_editar_recepta">Receptari</string>
     <string name="title_activity_ingredients">Receptari</string>
     <string name="title_activity_edit_ingredients">Receptari</string>
+    <string name="title_activity_ingredient_substitut">IngredientSubstitut</string>
+    <string name="hello_world">Hello world!</string>
 
 </resources>

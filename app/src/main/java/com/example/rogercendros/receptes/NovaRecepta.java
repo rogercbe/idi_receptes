@@ -28,6 +28,7 @@ public class NovaRecepta extends ActionBarActivity {
     private int idDrawable;
     private SpinnerAdapter adaptador;
     public static List llistaIngredients;
+    public static List llistaSubstituts;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +37,7 @@ public class NovaRecepta extends ActionBarActivity {
 
         //Inicialitzar llista d'ingredients
         llistaIngredients = new ArrayList<Ingredient>();
+        llistaSubstituts = new ArrayList<Substitut>();
 
         idDrawable = R.drawable.defecte;
         titol = (EditText)findViewById(R.id.titol);
@@ -59,6 +61,7 @@ public class NovaRecepta extends ActionBarActivity {
         if (esValid()) {
             int id = dbManager.afegirRecepta(recepta);
             dbManager.afegirIngredientsARecepta(id, llistaIngredients);
+            dbManager.afegirIngredientsSubstituts(id, llistaSubstituts);
             Intent returnIntent = new Intent();
             setResult(MainActivity.RESULT_OK, returnIntent);
             finish();
@@ -80,8 +83,18 @@ public class NovaRecepta extends ActionBarActivity {
 
     public void seleccionarIngredients(View view)
     {
-        Intent intent = new Intent(this, IngredientsActivity.class);
-        startActivityForResult(intent, 10);
+        if(dbManager.llegirIngredients().size() > 0) {
+            Intent intent = new Intent(this, IngredientsActivity.class);
+            startActivityForResult(intent, 10);
+        } else Toast.makeText(NovaRecepta.this, "No hi ha ingredients!", Toast.LENGTH_SHORT).show();
+    }
+
+    public void seleccionarSubstituts(View view)
+    {
+        if(llistaIngredients.size() > 0) {
+            Intent intent = new Intent(this, IngredientSubstitut.class);
+            startActivityForResult(intent, 25);
+        } else Toast.makeText(NovaRecepta.this, "Abans has de seleccionar com a mínim un ingredient!", Toast.LENGTH_SHORT).show();
     }
 
     @Override
