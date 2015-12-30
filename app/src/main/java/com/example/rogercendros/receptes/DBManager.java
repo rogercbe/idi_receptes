@@ -353,7 +353,7 @@ public class DBManager extends SQLiteOpenHelper {
         if (c != null && c.isClosed()) c.close();
 
         if (llista == "") return "Aquest ingredient és essencial!";
-        return llista.substring(0, llista.length()-2);
+        return llista;
     }
 }
 

@@ -42,7 +42,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="El·laboració:"
+            android:text="Descripció:"
             android:layout_marginTop="20dp"
             android:id="@+id/tDesc"
             android:layout_below="@+id/imatge" />

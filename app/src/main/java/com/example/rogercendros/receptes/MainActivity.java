@@ -135,20 +135,6 @@ public class MainActivity extends ActionBarActivity {
         startActivityForResult(i, 20);
     }
 
-    public void about(View view)
-    {
-        AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
-        alertDialog.setTitle("Alert");
-        alertDialog.setMessage("Alert message to be shown");
-        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-        alertDialog.show();
-    }
-
     public void about()
     {
         AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
@@ -167,8 +153,8 @@ public class MainActivity extends ActionBarActivity {
     {
         AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
         alertDialog.setTitle("Ajuda");
-        alertDialog.setMessage("Aquesta aplicació permet gestionar un llibre de receptes virtual.\n\nPots afegir noves receptes prement el botó '+' de la pàgina principal. " +
-                "Si necessites visualitzar-les en detall, editar-les o esborrar-les o fins i tot substituir ingredients d'una recepta, podràs fer ràpidament prement a una recepta de la llista.\n\nFinalment pots utilitzar el buscador del menú" +
+        alertDialog.setMessage("Aquesta aplicació permet gestionar un llibre de receptes virtual.\n\nComença a crear receptes prement el botó '+' de la pàgina principal. " +
+                "Si necessites visualitzar-les en detall, editar-les o esborrar-les ho podràs fer ràpidament prement a una recepta de la llista.\n\nFinalment pots utilitzar el buscador del menú" +
                 " per filtrar totes les receptes i buscar la que més t'interessi aplicant els filtres convenients!\n\n" +
                 "Fàcil, oi?");
         alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "GRÀCIES",

@@ -28,12 +28,13 @@
             android:id="@+id/categoria"
             android:layout_marginTop="20dp"
             android:layout_below="@+id/titol"
-            android:layout_alignParentStart="true" />
+            android:layout_alignParentStart="true"
+            android:spinnerMode="dialog" />
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="El·laboració"
+            android:hint="Descripció"
             android:id="@+id/descripcio"
             android:layout_marginTop="20dp"
             android:layout_below="@+id/categoria"
@@ -46,21 +47,21 @@
             android:layout_alignParentBottom="true"
             android:layout_below="@id/descripcio">
 
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Seleccionar Ingredients"
-                android:id="@+id/btnSeleccionar"
-                android:onClick="seleccionarIngredients"
-                android:layout_below="@+id/descripcio" />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Seleccionar Ingredients"
+            android:id="@+id/btnSeleccionar"
+            android:onClick="seleccionarIngredients"
+            android:layout_below="@+id/descripcio" />
 
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Ingredients Alternatius"
-                android:id="@+id/btnSubstituts"
-                android:onClick="seleccionarSubstituts"
-                android:layout_below="@+id/btnSeleccionar" />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ingredients Alternatius"
+            android:id="@+id/btnSubstituts"
+            android:onClick="seleccionarSubstituts"
+            android:layout_below="@+id/btnSeleccionar" />
 
             <Button
                 android:layout_width="match_parent"
@@ -82,8 +83,9 @@
             android:layout_alignParentStart="true" />
 
         <ImageView
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:scaleType="centerCrop"
             android:id="@+id/imatge" />
 
     </RelativeLayout>
