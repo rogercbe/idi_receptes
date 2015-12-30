@@ -20,14 +20,14 @@
             android:hint="Nom de la recepta"
             android:layout_marginTop="20dp"
             android:id="@+id/titol"
-            android:layout_below="@+id/btnFoto" />
+            android:layout_below="@+id/imatge" />
 
         <Spinner
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/categoria"
             android:layout_marginTop="20dp"
-            android:layout_below="@+id/titol"
+            android:layout_below="@+id/descripcio"
             android:layout_alignParentStart="true"
             android:spinnerMode="dialog" />
 
@@ -37,7 +37,7 @@
             android:hint="Descripció"
             android:id="@+id/descripcio"
             android:layout_marginTop="20dp"
-            android:layout_below="@+id/categoria"
+            android:layout_below="@+id/titol"
             android:layout_alignParentStart="true" />
 
         <LinearLayout
@@ -45,23 +45,24 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_below="@id/descripcio">
+            android:layout_marginTop="20dp"
+            android:layout_below="@id/categoria">
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Seleccionar Ingredients"
-            android:id="@+id/btnSeleccionar"
-            android:onClick="seleccionarIngredients"
-            android:layout_below="@+id/descripcio" />
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Seleccionar Ingredients"
+                android:id="@+id/btnSeleccionar"
+                android:onClick="seleccionarIngredients"
+                android:layout_below="@+id/descripcio" />
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Ingredients Alternatius"
-            android:id="@+id/btnSubstituts"
-            android:onClick="seleccionarSubstituts"
-            android:layout_below="@+id/btnSeleccionar" />
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Ingredients Alternatius"
+                android:id="@+id/btnSubstituts"
+                android:onClick="seleccionarSubstituts"
+                android:layout_below="@+id/btnSeleccionar" />
 
             <Button
                 android:layout_width="match_parent"
@@ -69,24 +70,33 @@
                 android:text="Afegir Recepta"
                 android:id="@+id/btnAfegir"
                 android:onClick="afegirRecepta"
+                android:layout_marginTop="50dp"
+                android:textColor="#fff"
+                android:background="#16a085"
                 android:layout_alignParentBottom="true"/>
 
         </LinearLayout>
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Canviar Imatge"
-            android:id="@+id/btnFoto"
-            android:onClick="seleccionarFoto"
-            android:layout_below="@+id/imatge"
-            android:layout_alignParentStart="true" />
-
-        <ImageView
+        <ImageButton
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:scaleType="centerCrop"
+            android:onClick="seleccionarFoto"
+            android:background="@null"
             android:id="@+id/imatge" />
+
+        <TextView
+            android:id="@+id/text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="10dp"
+            android:padding="7dp"
+            android:background="#222"
+            android:textColor="#ddd"
+            android:drawableLeft="@android:drawable/ic_menu_edit"
+            android:layout_below="@+id/imatge"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="-120dp"/>
 
     </RelativeLayout>
 

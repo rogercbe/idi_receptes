@@ -1,5 +1,7 @@
 package com.example.rogercendros.receptes;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
@@ -10,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -58,12 +61,45 @@ public class IngredientsActivity extends ActionBarActivity {
                     }
                 }
         );
+
+        llista.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
+                                           int pos, long id) {
+                // TODO Auto-generated method stub
+                Ingredient ingredient = (Ingredient) adaptador.getItem(pos);
+                esborrarIngredient(ingredient);
+                return true;
+            }
+        });
+    }
+
+    private void esborrarIngredient(final Ingredient ingredient) {
+        AlertDialog.Builder adb = new AlertDialog.Builder(this);
+        adb.setTitle("Esborrar Ingredient");
+        adb.setMessage("Segur que vols esborrar aquest ingredient: "+ingredient.getNom()+"?");
+        adb.setPositiveButton("D'ACORD", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                // esborrar ingredient
+                // tornar amb resultat ok
+                dbManager.esborrarIngredient(ingredient.getId());
+                redrawLlista();
+                Toast.makeText(IngredientsActivity.this, "Has esborrat l'ingredient " +ingredient.getNom(), Toast.LENGTH_SHORT).show();
+            }
+        });
+        adb.setNegativeButton("CANCEL·LAR", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            } });
+        adb.show();
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_ingredients, menu);
+        
+        
         return true;
     }
 
@@ -74,7 +110,43 @@ public class IngredientsActivity extends ActionBarActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
+        if (id == R.id.afegir) {
+            afegirIngredient();
+            return true;
+        }
+
         return super.onOptionsItemSelected(item);
+    }
+
+    private void afegirIngredient() {
+        final EditText txtIngredient = new EditText(this);
+
+        new AlertDialog.Builder(this)
+                .setTitle("Afegir Ingredient")
+                .setMessage("Nom de l'Ingredient:")
+                .setView(txtIngredient)
+                .setPositiveButton("Afegir", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        String ingredient = txtIngredient.getText().toString();
+                        if (ingredientValid(ingredient)) {
+                            dbManager.afegirIngredient(ingredient);
+                            Toast.makeText(IngredientsActivity.this, "Has afegit " + ingredient + " a la llista!", Toast.LENGTH_SHORT).show();
+                            redrawLlista();
+                        }
+                    }
+                })
+                .setNegativeButton("Cancel·lar", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        dialog.dismiss();
+                    }
+                })
+                .show();
+    }
+
+    private void redrawLlista() {
+        llista = (ListView)findViewById(R.id.listView);
+        adaptador = new IngredientsAdapter(this, dbManager.llegirIngredients());
+        llista.setAdapter(adaptador);
     }
 
     public void toggleIngredient(Ingredient ingredient) {
@@ -109,8 +181,24 @@ public class IngredientsActivity extends ActionBarActivity {
         }
     }
 
+    public boolean ingredientValid(String ingredient){
+        //es valid si no es buit i no esta a la base de dades
+        if(!ingredient.isEmpty()) {
+            if (!dbManager.getIngredientByNom(ingredient)) {
+                return true;
+            }  Toast.makeText(IngredientsActivity.this, "Aquest ingredient ja està disponible!", Toast.LENGTH_SHORT).show();
+        }else {
+            Toast.makeText(IngredientsActivity.this, "Aquest camp és obligatori!", Toast.LENGTH_SHORT).show();
+        }
+        return false;
+    }
+
     @Override
     public void onResume() {
         super.onResume();  // Always call the superclass method first
+
+        llista = (ListView)findViewById(R.id.listView);
+        adaptador = new IngredientsAdapter(this, dbManager.llegirIngredients());
+        llista.setAdapter(adaptador);
     }
 }

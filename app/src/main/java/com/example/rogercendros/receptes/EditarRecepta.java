@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -21,7 +22,7 @@ import java.util.List;
 public class EditarRecepta extends ActionBarActivity {
 
     private DBManager dbManager;
-    private ImageView imatge;
+    private ImageButton imatge;
     private EditText titol;
     private Spinner categoria;
     private EditText descripcio;
@@ -50,7 +51,7 @@ public class EditarRecepta extends ActionBarActivity {
         titol = (EditText)findViewById(R.id.titol);
         categoria = (Spinner)findViewById(R.id.categoria);
         descripcio = (EditText)findViewById(R.id.descripcio);
-        imatge = (ImageView)findViewById(R.id.imatge);
+        imatge = (ImageButton)findViewById(R.id.imatge);
 
         titol.setText(recepta.getTitol());
         categoria.setSelection(((ArrayAdapter<String>)categoria.getAdapter()).getPosition(recepta.getCategoria()));

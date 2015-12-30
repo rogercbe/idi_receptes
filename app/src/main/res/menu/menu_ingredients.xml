@@ -2,4 +2,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.example.rogercendros.receptes.IngredientsActivity">
+    <item android:id="@+id/afegir"
+        android:title="Afegir"
+        android:icon="@android:drawable/ic_menu_add"
+        android:orderInCategory="10"
+        app:showAsAction="always" />
 </menu>

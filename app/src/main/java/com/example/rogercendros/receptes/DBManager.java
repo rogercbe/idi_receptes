@@ -20,6 +20,9 @@ public class DBManager extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+
+        db.execSQL("PRAGMA foreign_keys = ON");
+
         String queryReceptes = "CREATE TABLE receptes (" +
                 "_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "_titol TEXT, " +
@@ -89,6 +92,13 @@ public class DBManager extends SQLiteOpenHelper {
     {
         SQLiteDatabase db = getWritableDatabase();
         db.execSQL("DELETE FROM receptes WHERE _id = " + id);
+    }
+
+    // Esborrar un ingredient
+    public void esborrarIngredient(int id)
+    {
+        SQLiteDatabase db = getWritableDatabase();
+        db.execSQL("DELETE FROM ingredients WHERE _id = " + id);
     }
 
     // Esborrar ingredients d'una recepta
@@ -199,7 +209,7 @@ public class DBManager extends SQLiteOpenHelper {
     {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues valors = new ContentValues();
-        valors.put("_ingredient", ingredient);
+        valors.put("_ingredient", ingredient.toLowerCase());
         db.insert("ingredients", null, valors);
         db.close();
     }
@@ -265,8 +275,8 @@ public class DBManager extends SQLiteOpenHelper {
     public void seedIngredients()
     {
         String[] ingredients = {"Enciam", "Sal", "Sucre", "Patates", "Pollastre", "Pebre", "Llimona", "Pebrot", "Arros", "Macarrons",
-        "Espaguetis", "Orenga", "Ous", "Llet", "Aigua", "Farina", "Llevat", "Xocolata", "Galetes", "Cervesa", "Vi", "Fruits Secs", "Vinagre", "Oli",
-        "Llobarro", "Vedella", "Porc", "Galets", "Turrons", "Castanyes", "Pastanaga", "Mongetes", "Cava", "Cola", "Caldo", "Gambes", "Sardina", "Butifarra" };
+                "Espaguetis", "Orenga", "Ous", "Llet", "Aigua", "Farina", "Llevat", "Xocolata", "Galetes", "Cervesa", "Vi", "Fruits Secs", "Vinagre", "Oli",
+                "Llobarro", "Vedella", "Porc", "Galets", "Turrons", "Castanyes", "Pastanaga", "Mongetes", "Cava", "Cola", "Caldo", "Gambes", "Sardina", "Butifarra", "Tomaquet", "Ceba", "Formatge" };
 
         for(int i = 0; i < ingredients.length; ++i) {
             afegirIngredient(ingredients[i]);
@@ -354,6 +364,95 @@ public class DBManager extends SQLiteOpenHelper {
 
         if (llista == "") return "Aquest ingredient és essencial!";
         return llista;
+    }
+
+    public boolean getIngredientByNom(String ingredient) {
+        SQLiteDatabase db = getWritableDatabase();
+        //query("table", tableColumns, whereClause, whereArgs, null, null, orderBy);
+        String query = "SELECT * FROM ingredients i WHERE i._ingredient = '"+ingredient.toLowerCase()+"'";
+        Cursor c = db.rawQuery(query, null);
+
+        if (c.moveToFirst()) {
+            return true;
+        }
+
+        if (c != null && c.isClosed()) c.close();
+
+        return false;
+    }
+
+    public void seedReceptes()
+    {
+
+        Recepta macarrons = new Recepta();
+        macarrons.setImatge(R.drawable.macarrons);
+        macarrons.setTitol("Macarrons casolans");
+        macarrons.setDescripcio("Macarrons a la bolonyesa amb salsa de tomaquet i carn picada.");
+        macarrons.setCategoria("Cuina Mediterrània");
+        afegirRecepta(macarrons);
+
+        Recepta arros = new Recepta();
+        arros.setImatge(R.drawable.arroz);
+        arros.setTitol("Arros a les mil delicies");
+        arros.setDescripcio("Arros guarnit amb verdures i espècies.");
+        arros.setCategoria("Cuina Asiàtica");
+        afegirRecepta(arros);
+
+        Recepta tacos = new Recepta();
+        tacos.setImatge(R.drawable.fajas);
+        tacos.setTitol("Fajitas Mejicanas");
+        tacos.setDescripcio("Carn de vedella acompanyada amb un sofregit de pebrot, tomaquet i ceba embolicat en tortitas.");
+        tacos.setCategoria("Cuina Mexicana");
+        afegirRecepta(tacos);
+
+        Recepta amanida = new Recepta();
+        amanida.setImatge(R.drawable.ensalada);
+        amanida.setTitol("Pensament Verd");
+        amanida.setDescripcio("La millor recepta per soprendre a casa, amanida verda amb verdures i condiments.");
+        amanida.setCategoria("Cuina Moderna");
+        afegirRecepta(amanida);
+
+        Recepta bistec = new Recepta();
+        bistec.setImatge(R.drawable.entrecot);
+        bistec.setTitol("Filet de Vedella");
+        bistec.setDescripcio("Carn de vedella de primera qualitat acompanyat amb pataes fregides i amanida.");
+        bistec.setCategoria("Cuina Occidental");
+        afegirRecepta(bistec);
+
+        // afegir ingredients
+        SQLiteDatabase db = getWritableDatabase();
+        db.execSQL("INSERT INTO receptes_ingredients VALUES("+ 1 + ", " + 10 +")");
+        db.execSQL("INSERT INTO receptes_ingredients VALUES("+ 1 + ", " + 39 +")");
+        db.execSQL("INSERT INTO receptes_ingredients VALUES("+ 1 + ", " + 40 +")");
+
+        db.execSQL("INSERT INTO receptes_ingredients VALUES("+ 2 + ", " + 9 +")");
+        db.execSQL("INSERT INTO receptes_ingredients VALUES("+ 2 + ", " + 39 +")");
+        db.execSQL("INSERT INTO receptes_ingredients VALUES("+ 2 + ", " + 36 +")");
+
+        db.execSQL("INSERT INTO receptes_ingredients VALUES("+ 3 + ", " + 5 +")");
+        db.execSQL("INSERT INTO receptes_ingredients VALUES("+ 3 + ", " + 8 +")");
+        db.execSQL("INSERT INTO receptes_ingredients VALUES("+ 3 + ", " + 39 +")");
+
+        db.execSQL("INSERT INTO receptes_ingredients VALUES("+ 5 + ", " + 1 +")");
+        db.execSQL("INSERT INTO receptes_ingredients VALUES("+ 5 + ", " + 4 +")");
+        db.execSQL("INSERT INTO receptes_ingredients VALUES("+ 5 + ", " + 26 +")");
+
+        db.execSQL("INSERT INTO receptes_ingredients VALUES("+ 4 + ", " + 1 +")");
+        db.execSQL("INSERT INTO receptes_ingredients VALUES("+ 4 + ", " + 31 +")");
+        db.execSQL("INSERT INTO receptes_ingredients VALUES("+ 4 + ", " + 23 +")");
+        db.execSQL("INSERT INTO receptes_ingredients VALUES("+ 4 + ", " + 24 +")");
+
+        //afegir substitucions
+
+        db.execSQL("INSERT INTO substitucions VALUES("+ 1 + ", " + 39 + ", " + 24 +")");
+        db.execSQL("INSERT INTO substitucions VALUES("+ 2 + ", " + 36 + ", " + 5 +")");
+        db.execSQL("INSERT INTO substitucions VALUES("+ 3 + ", " + 5 + ", " + 26 +")");
+        db.execSQL("INSERT INTO substitucions VALUES("+ 4 + ", " + 31 + ", " + 41 +")");
+        db.execSQL("INSERT INTO substitucions VALUES("+ 5 + ", " + 4 + ", " + 9 +")");
+        db.execSQL("INSERT INTO substitucions VALUES("+ 5 + ", " + 4 + ", " + 32 +")");
+
+
+
     }
 }
 

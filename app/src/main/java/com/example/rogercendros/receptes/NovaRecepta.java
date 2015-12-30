@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
@@ -25,7 +26,7 @@ public class NovaRecepta extends ActionBarActivity {
     private EditText titol;
     private Spinner categoria;
     private EditText descripcio;
-    private ImageView imatge;
+    private ImageButton imatge;
     private int idDrawable;
     private SpinnerAdapter adaptador;
     // solució temporal
@@ -49,7 +50,7 @@ public class NovaRecepta extends ActionBarActivity {
         titol = (EditText)findViewById(R.id.titol);
         categoria = (Spinner)findViewById(R.id.categoria);
         descripcio = (EditText)findViewById(R.id.descripcio);
-        imatge = (ImageView)findViewById(R.id.imatge);
+        imatge = (ImageButton)findViewById(R.id.imatge);
         imatge.setImageResource(idDrawable);
 
         inicialitzarSpinner();

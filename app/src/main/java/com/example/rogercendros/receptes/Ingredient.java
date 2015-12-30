@@ -21,10 +21,10 @@ public class Ingredient {
 
     public int getId(){return id;}
 
-    public String getNom(){return nom;}
+    public String getNom(){return nom.substring(0, 1).toUpperCase() + nom.substring(1);}
 
     @Override
-    public String toString(){return nom;}
+    public String toString(){return nom.substring(0, 1).toUpperCase() + nom.substring(1);}
 
     @Override
     public boolean equals(Object v) {
