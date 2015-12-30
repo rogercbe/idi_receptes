@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -30,7 +31,9 @@ public class ReceptaActivity extends ActionBarActivity {
     private TextView alternatius;
     private Recepta recepta;
     private String llista;
+    private ArrayAdapter list_adapter;
     private List llistaAlternatius;
+    private ListView listingredients;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +52,7 @@ public class ReceptaActivity extends ActionBarActivity {
         llista = dbManager.getLlistaIngredients(id);
         llistaAlternatius = dbManager.llegirSubstitutsDeRecepta(id);
 
+        listingredients = (ListView)findViewById(R.id.listView);
         titol = (TextView)findViewById(R.id.titol);
         categoria = (TextView)findViewById(R.id.categoria);
         descripcio = (TextView)findViewById(R.id.descripcio);
@@ -62,6 +66,13 @@ public class ReceptaActivity extends ActionBarActivity {
         ingredients.setText(llista);
         imatge.setImageResource(recepta.getImatge());
         initAlternatius();
+        initListView();
+    }
+
+    private void initListView() {
+        String[] list = {"1", "2", "3"};
+        list_adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, R.id.listView, list);
+        listingredients.setAdapter(list_adapter);
     }
 
 
@@ -167,6 +178,5 @@ public class ReceptaActivity extends ActionBarActivity {
         }
 
         alternatius.setText(llista);
-
     }
 }

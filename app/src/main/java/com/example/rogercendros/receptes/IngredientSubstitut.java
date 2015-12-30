@@ -3,6 +3,7 @@ package com.example.rogercendros.receptes;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -102,10 +103,12 @@ public class IngredientSubstitut extends ActionBarActivity {
         Ingredient ori = (Ingredient)original.getSelectedItem();
         Ingredient nou = (Ingredient)substitut.getSelectedItem();
         Substitut s = new Substitut(ori.getId(), nou.getId());
-        if(!NovaRecepta.llistaSubstituts.contains(s)) {
+        if(!NovaRecepta.llistaSubstituts.contains(s) && !ori.getNom().equals(nou.getNom())) {
+            Log.i("ing", String.valueOf(ori.getNom().equals(nou.getNom())));
             NovaRecepta.llistaSubstituts.add(s);
             Toast.makeText(IngredientSubstitut.this, "Afegit "+nou.getNom()+" com a substitut de "+ori.getNom()+"!", Toast.LENGTH_SHORT).show();
+        } else if(ori.getNom().equals(nou.getNom())) {
+            Toast.makeText(IngredientSubstitut.this, "Un ingredient no pot ser substitut d'ell mateix!", Toast.LENGTH_SHORT).show();
         } else Toast.makeText(IngredientSubstitut.this, nou.getNom() + " ja substitueix a " + ori.getNom() +"!", Toast.LENGTH_SHORT).show();
-        // mostrar en una llista les substitucions
     }
 }

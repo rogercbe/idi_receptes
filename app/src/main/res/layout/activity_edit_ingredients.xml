@@ -6,26 +6,24 @@
     android:layout_height="fill_parent">
 
     <ListView
-        android:layout_weight="1.0"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
         android:id="@+id/listView"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_above="@+id/acceptar" />
+        android:layout_weight="1.0" />
 
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true" >
+        android:layout_alignParentBottom="true">
 
         <Button
+            android:id="@+id/acceptar"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="Seleccionar"
-            android:id="@+id/acceptar"
             android:onClick="seleccionar"
-            android:layout_alignParentBottom="true" />
+            android:text="Acceptar"/>
     </LinearLayout>
 
 </LinearLayout>

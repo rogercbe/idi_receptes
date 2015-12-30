@@ -28,6 +28,8 @@ public class NovaRecepta extends ActionBarActivity {
     private ImageView imatge;
     private int idDrawable;
     private SpinnerAdapter adaptador;
+    // solució temporal
+    // ... jajaja
     public static List llistaIngredients;
     public static List llistaSubstituts;
 

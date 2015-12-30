@@ -1,76 +1,91 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:orientation="vertical"
-    tools:context="com.example.rogercendros.receptes.NovaRecepta">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ScrollView01"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
 
-    <EditText
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Nom de la recepta"
-        android:layout_marginTop="20dp"
-        android:id="@+id/titol"
-        android:layout_below="@+id/btnFoto" />
+        android:layout_height="match_parent"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:orientation="vertical"
+        tools:context="com.example.rogercendros.receptes.NovaRecepta">
 
-    <Spinner
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/categoria"
-        android:layout_marginTop="20dp"
-        android:layout_below="@+id/titol"
-        android:layout_alignParentStart="true" />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nom de la recepta"
+            android:layout_marginTop="20dp"
+            android:id="@+id/titol"
+            android:layout_below="@+id/btnFoto" />
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="El·laboració"
-        android:id="@+id/descripcio"
-        android:layout_marginTop="20dp"
-        android:layout_below="@+id/categoria"
-        android:layout_alignParentStart="true" />
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/categoria"
+            android:layout_marginTop="20dp"
+            android:layout_below="@+id/titol"
+            android:layout_alignParentStart="true" />
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Afegir Recepta"
-        android:id="@+id/btnAfegir"
-        android:onClick="afegirRecepta"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true" />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="El·laboració"
+            android:id="@+id/descripcio"
+            android:layout_marginTop="20dp"
+            android:layout_below="@+id/categoria"
+            android:layout_alignParentStart="true" />
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Seleccionar Ingredients"
-        android:id="@+id/btnSeleccionar"
-        android:onClick="seleccionarIngredients"
-        android:layout_below="@+id/descripcio" />
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_below="@id/descripcio">
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Ingredients Alternatius"
-        android:id="@+id/btnSubstituts"
-        android:onClick="seleccionarSubstituts"
-        android:layout_below="@+id/btnSeleccionar" />
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Seleccionar Ingredients"
+                android:id="@+id/btnSeleccionar"
+                android:onClick="seleccionarIngredients"
+                android:layout_below="@+id/descripcio" />
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Canviar Imatge"
-        android:id="@+id/btnFoto"
-        android:onClick="seleccionarFoto"
-        android:layout_below="@+id/imatge"
-        android:layout_alignParentStart="true" />
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Ingredients Alternatius"
+                android:id="@+id/btnSubstituts"
+                android:onClick="seleccionarSubstituts"
+                android:layout_below="@+id/btnSeleccionar" />
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/imatge" />
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Afegir Recepta"
+                android:id="@+id/btnAfegir"
+                android:onClick="afegirRecepta"
+                android:layout_alignParentBottom="true"/>
 
-</RelativeLayout>
+        </LinearLayout>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Canviar Imatge"
+            android:id="@+id/btnFoto"
+            android:onClick="seleccionarFoto"
+            android:layout_below="@+id/imatge"
+            android:layout_alignParentStart="true" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imatge" />
+
+    </RelativeLayout>
+
+</ScrollView>
