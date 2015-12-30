@@ -335,6 +335,26 @@ public class DBManager extends SQLiteOpenHelper {
 
         return ingredients;
     }
+
+    public String getSubstitutsDeIngredient(long id_recepta, int id_ingredient)
+    {
+        String llista = "";
+        SQLiteDatabase db = getWritableDatabase();
+        //query("table", tableColumns, whereClause, whereArgs, null, null, orderBy);
+        String query = "SELECT * FROM substitucions s JOIN ingredients i ON s._idNou=i._id WHERE s._idRecepta="+id_recepta+" AND s._idOriginal ="+id_ingredient;
+        Cursor c = db.rawQuery(query, null);
+
+        if (c.moveToFirst()) {
+            do {
+                llista += c.getString(c.getColumnIndexOrThrow("_ingredient")) + "\n";
+            } while(c.moveToNext());
+        }
+
+        if (c != null && c.isClosed()) c.close();
+
+        if (llista == "") return "Aquest ingredient és essencial!";
+        return llista.substring(0, llista.length()-2);
+    }
 }
 
 

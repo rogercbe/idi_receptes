@@ -12,7 +12,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -73,6 +75,31 @@ public class ReceptaActivity extends ActionBarActivity {
         params.height = llista.size() * 100;
         listingredients.setLayoutParams(params);
         listingredients.requestLayout();
+
+        final int idRecepta = id;
+
+        listingredients.setOnItemClickListener(
+                new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                        Ingredient ingredient = (Ingredient) listingredients.getItemAtPosition(position);
+                        String substituts = dbManager.getSubstitutsDeIngredient(idRecepta, ingredient.getId());
+
+                        AlertDialog alertDialog = new AlertDialog.Builder(ReceptaActivity.this).create();
+                        alertDialog.setTitle("Ingredients alternatius");
+                        alertDialog.setMessage(substituts);
+                        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "D'ACORD",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        dialog.dismiss();
+                                    }
+                                });
+                        alertDialog.show();
+                    }
+                }
+        );
+
     }
 
 
@@ -176,7 +203,5 @@ public class ReceptaActivity extends ActionBarActivity {
             nou = dbManager.getIngredientById(s.getIdNou()).getNom();
             llista += nou + " pot substituir " + vell + "\n";
         }
-
-        //alternatius.setText(llista);
     }
 }
