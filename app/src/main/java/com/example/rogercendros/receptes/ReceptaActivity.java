@@ -7,9 +7,11 @@ import android.media.Image;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -27,11 +29,8 @@ public class ReceptaActivity extends ActionBarActivity {
     private TextView titol;
     private TextView categoria;
     private TextView descripcio;
-    private TextView ingredients;
-    private TextView alternatius;
     private Recepta recepta;
-    private String llista;
-    private ArrayAdapter list_adapter;
+    private List llista;
     private List llistaAlternatius;
     private ListView listingredients;
 
@@ -49,30 +48,31 @@ public class ReceptaActivity extends ActionBarActivity {
         int id = bundle.getInt("id");
 
         recepta = dbManager.llegirReceptaPerId(id);
-        llista = dbManager.getLlistaIngredients(id);
+        llista = dbManager.getIngredientsDeRecepta(id);
         llistaAlternatius = dbManager.llegirSubstitutsDeRecepta(id);
 
         listingredients = (ListView)findViewById(R.id.listView);
         titol = (TextView)findViewById(R.id.titol);
         categoria = (TextView)findViewById(R.id.categoria);
         descripcio = (TextView)findViewById(R.id.descripcio);
-        ingredients = (TextView)findViewById(R.id.ingredients);
-        alternatius = (TextView)findViewById(R.id.alternatius);
         imatge = (ImageView)findViewById(R.id.imatge);
 
         titol.setText(recepta.getTitol());
         categoria.setText(recepta.getCategoria());
         descripcio.setText(recepta.getDescripcio());
-        ingredients.setText(llista);
         imatge.setImageResource(recepta.getImatge());
         initAlternatius();
-        initListView();
+        initListView(id);
     }
 
-    private void initListView() {
-        String[] list = {"1", "2", "3"};
-        list_adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, R.id.listView, list);
+    private void initListView(int id) {
+        llista = dbManager.getIngredientsDeRecepta(id);
+        ArrayAdapter<String> list_adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, llista);
         listingredients.setAdapter(list_adapter);
+        ViewGroup.LayoutParams params = listingredients.getLayoutParams();
+        params.height = llista.size() * 100;
+        listingredients.setLayoutParams(params);
+        listingredients.requestLayout();
     }
 
 
@@ -118,15 +118,15 @@ public class ReceptaActivity extends ActionBarActivity {
         dbManager = new DBManager(this, null);
 
         recepta = dbManager.llegirReceptaPerId(recepta.getId());
-        llista = dbManager.getLlistaIngredients(recepta.getId());
+        llista = dbManager.getIngredientsDeRecepta(recepta.getId());
         llistaAlternatius = dbManager.llegirSubstitutsDeRecepta(recepta.getId());
 
         titol.setText(recepta.getTitol());
         categoria.setText(recepta.getCategoria());
         descripcio.setText(recepta.getDescripcio());
-        ingredients.setText(llista);
         imatge.setImageResource(recepta.getImatge());
         initAlternatius();
+        initListView(recepta.getId());
     }
 
     @Override
@@ -177,6 +177,6 @@ public class ReceptaActivity extends ActionBarActivity {
             llista += nou + " pot substituir " + vell + "\n";
         }
 
-        alternatius.setText(llista);
+        //alternatius.setText(llista);
     }
 }

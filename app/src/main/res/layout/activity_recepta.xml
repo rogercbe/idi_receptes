@@ -48,14 +48,6 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Medium Text"
-            android:id="@+id/ingredients"
-            android:layout_below="@+id/tIng" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Ingredients:"
             android:layout_marginTop="20dp"
@@ -72,29 +64,24 @@
             android:layout_toRightOf="@+id/imatge"
             android:layout_below="@+id/titol"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Ingredients Alternatius:"
-            android:layout_marginTop="20dp"
-            android:id="@+id/tAlt"
-            android:layout_below="@+id/ingredients" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Medium Text"
-            android:id="@+id/alternatius"
-            android:layout_below="@+id/tAlt" />
-
-        <ListView
-            android:id="@+id/listView"
+        <LinearLayout
+            android:id="@+id/layoutButtons"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_weight="1.0" />
+            android:layout_height="fill_parent"
+            android:layout_alignParentBottom="true"
+            android:layout_below="@id/tIng"
+            android:orientation="vertical" >
+
+            <ListView
+                android:id="@+id/listView"
+                android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:paddingBottom="0dp"
+                android:paddingTop="0dp"
+                android:focusable="false" />
+
+        </LinearLayout>
 
     </RelativeLayout>
 

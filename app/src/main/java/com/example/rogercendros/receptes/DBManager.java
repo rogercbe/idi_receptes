@@ -313,6 +313,28 @@ public class DBManager extends SQLiteOpenHelper {
 
         return ingredients;
     }
+
+    public List getIngredientsDeRecepta(int id)
+    {
+        List ingredients = new ArrayList<Ingredient>();
+        SQLiteDatabase db = getWritableDatabase();
+        //query("table", tableColumns, whereClause, whereArgs, null, null, orderBy);
+        String query = "SELECT * FROM receptes_ingredients a JOIN ingredients b ON a._idIngredient=b._id WHERE a._idRecepta="+id;
+        Cursor c = db.rawQuery(query, null);
+
+        if (c.moveToFirst()) {
+            do {
+                Ingredient i = new Ingredient();
+                i.setId(c.getInt(c.getColumnIndexOrThrow("_id")));
+                i.setNom(c.getString(c.getColumnIndexOrThrow("_ingredient")));
+                ingredients.add(i);
+            } while(c.moveToNext());
+        }
+
+        if (c != null && c.isClosed()) c.close();
+
+        return ingredients;
+    }
 }
 
 
