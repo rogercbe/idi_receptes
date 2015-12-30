@@ -59,6 +59,12 @@
             android:label="Filtrar"
             android:parentActivityName=".MainActivity" >
         </activity>
+        <activity
+            android:name=".ResultatFiltre"
+            android:launchMode="singleTop"
+            android:parentActivityName=".MainActivity"
+            android:label="Resultat del filtre" >
+        </activity>
     </application>
 
 </manifest>

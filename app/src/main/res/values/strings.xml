@@ -12,5 +12,6 @@
     <string name="title_activity_ingredient_substitut">Ingredients Alternatius</string>
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_filtre">Filtre</string>
+    <string name="title_activity_resultat_filtre">ResultatFiltre</string>
 
 </resources>

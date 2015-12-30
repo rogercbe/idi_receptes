@@ -457,6 +457,30 @@ public class DBManager extends SQLiteOpenHelper {
 
 
     }
+
+    public List filtrarCategoria(String categoria) {
+
+        List receptes = new ArrayList<Recepta>();
+        SQLiteDatabase db = getWritableDatabase();
+        //query("table", tableColumns, whereClause, whereArgs, null, null, orderBy);
+        Cursor c = db.query("receptes", null, "_categoria = '" + categoria +"'", null, null, null, "_data DESC");
+
+        if (c.moveToFirst()) {
+            do {
+                Recepta recepta = new Recepta();
+                recepta.setId(c.getInt(c.getColumnIndexOrThrow("_id")));
+                recepta.setTitol(c.getString(c.getColumnIndexOrThrow("_titol")));
+                recepta.setCategoria(c.getString(c.getColumnIndexOrThrow("_categoria")));
+                recepta.setDescripcio(c.getString(c.getColumnIndexOrThrow("_descripcio")));
+                recepta.setImatge(c.getInt(c.getColumnIndexOrThrow("_imatge")));
+                receptes.add(recepta);
+            } while(c.moveToNext());
+        }
+
+        if (c != null && c.isClosed()) c.close();
+
+        return receptes;
+    }
 }
 
 

@@ -81,7 +81,8 @@ public class MainActivity extends ActionBarActivity {
         }*/
 
         if (id == R.id.buscar) {
-            buscar();
+            Intent intent = new Intent(this, Filtre.class);
+            startActivityForResult(intent, 31);
             return true;
         }
 
@@ -92,12 +93,6 @@ public class MainActivity extends ActionBarActivity {
 
         if (id == R.id.about) {
             about();
-            return true;
-        }
-
-        if (id == R.id.buscar) {
-            Intent intent = new Intent(this, Filtre.class);
-            startActivityForResult(intent, 31);
             return true;
         }
 
