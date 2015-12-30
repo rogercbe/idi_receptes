@@ -205,13 +205,14 @@ public class DBManager extends SQLiteOpenHelper {
     }
 
     // Afegir un nou ingredient
-    public void afegirIngredient(String ingredient)
+    public int afegirIngredient(String ingredient)
     {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues valors = new ContentValues();
         valors.put("_ingredient", ingredient.toLowerCase());
-        db.insert("ingredients", null, valors);
+        long id = db.insert("ingredients", null, valors);
         db.close();
+        return (int)id;
     }
 
     public void afegirIngredientsARecepta(int id, List ingredients)
@@ -356,7 +357,9 @@ public class DBManager extends SQLiteOpenHelper {
 
         if (c.moveToFirst()) {
             do {
-                llista += c.getString(c.getColumnIndexOrThrow("_ingredient")) + "\n";
+                String ing = c.getString(c.getColumnIndexOrThrow("_ingredient"));
+                ing = ing.substring(0, 1).toUpperCase() + ing.substring(1);
+                llista += ing + "\n";
             } while(c.moveToNext());
         }
 

@@ -129,7 +129,9 @@ public class IngredientsActivity extends ActionBarActivity {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         String ingredient = txtIngredient.getText().toString();
                         if (ingredientValid(ingredient)) {
-                            dbManager.afegirIngredient(ingredient);
+                            int nou_ing = dbManager.afegirIngredient(ingredient);
+                            Ingredient nou = dbManager.getIngredientById(nou_ing);
+                            NovaRecepta.llistaIngredients.add(nou);
                             Toast.makeText(IngredientsActivity.this, "Has afegit " + ingredient + " a la llista!", Toast.LENGTH_SHORT).show();
                             redrawLlista();
                         }

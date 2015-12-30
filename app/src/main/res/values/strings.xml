@@ -11,5 +11,6 @@
     <string name="title_activity_edit_ingredients">Seleccionar Ingredients</string>
     <string name="title_activity_ingredient_substitut">Ingredients Alternatius</string>
     <string name="hello_world">Hello world!</string>
+    <string name="title_activity_filtre">Filtre</string>
 
 </resources>

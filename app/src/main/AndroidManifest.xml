@@ -18,15 +18,15 @@
         </activity>
         <activity
             android:name=".ReceptaActivity"
-            android:parentActivityName=".MainActivity"
+            android:label="@string/title_activity_recepta"
             android:launchMode="singleTop"
-            android:label="@string/title_activity_recepta" >
+            android:parentActivityName=".MainActivity" >
         </activity>
         <activity
             android:name=".NovaRecepta"
+            android:label="@string/title_activity_nova_recepta"
             android:launchMode="singleTop"
-            android:parentActivityName=".MainActivity"
-            android:label="@string/title_activity_nova_recepta" >
+            android:parentActivityName=".MainActivity" >
         </activity>
         <activity
             android:name=".FotosActivity"
@@ -34,25 +34,30 @@
         </activity>
         <activity
             android:name=".EditarRecepta"
+            android:label="@string/title_activity_editar_recepta"
             android:launchMode="singleTop"
-            android:parentActivityName=".ReceptaActivity"
-            android:label="@string/title_activity_editar_recepta" >
+            android:parentActivityName=".ReceptaActivity" >
         </activity>
         <activity
             android:name=".IngredientsActivity"
-            android:parentActivityName=".NovaRecepta"
-            android:label="@string/title_activity_ingredients" >
+            android:label="@string/title_activity_ingredients"
+            android:parentActivityName=".NovaRecepta" >
         </activity>
         <activity
             android:name=".EditIngredientsActivity"
-            android:parentActivityName=".EditarRecepta"
-            android:label="@string/title_activity_edit_ingredients" >
+            android:label="@string/title_activity_edit_ingredients"
+            android:parentActivityName=".EditarRecepta" >
         </activity>
         <activity
-            android:parentActivityName=".NovaRecepta"
-            android:launchMode="singleTop"
             android:name=".IngredientSubstitut"
-            android:label="@string/title_activity_ingredient_substitut" >
+            android:label="@string/title_activity_ingredient_substitut"
+            android:launchMode="singleTop"
+            android:parentActivityName=".NovaRecepta" >
+        </activity>
+        <activity
+            android:name=".Filtre"
+            android:label="Filtrar"
+            android:parentActivityName=".MainActivity" >
         </activity>
     </application>
 

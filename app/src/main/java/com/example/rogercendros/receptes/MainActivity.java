@@ -95,6 +95,12 @@ public class MainActivity extends ActionBarActivity {
             return true;
         }
 
+        if (id == R.id.buscar) {
+            Intent intent = new Intent(this, Filtre.class);
+            startActivityForResult(intent, 31);
+            return true;
+        }
+
         return super.onOptionsItemSelected(item);
     }
 
