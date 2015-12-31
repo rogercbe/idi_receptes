@@ -21,11 +21,14 @@ public class Filtre extends ActionBarActivity {
 
     private DBManager dbManager;
     public static List resultat;
+    public static List llistaIngredients;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_filtre);
+
+        llistaIngredients = new ArrayList<Ingredient>();
 
         dbManager = new DBManager(this, null);
 
@@ -186,6 +189,24 @@ public class Filtre extends ActionBarActivity {
         String tipo = spinner.getSelectedItem().toString();
         if(tipo == "Per Categoria") filtratge();
         else if(tipo == "Amb Ingredient") filtratgeIngredient();
-        else Toast.makeText(this, "Falta fer", Toast.LENGTH_SHORT).show();
+        else filtratgeSenseIngredients();
+    }
+
+    public void seleccionarIngredients(View view)
+    {
+        if(dbManager.llegirIngredients().size() > 0) {
+            Intent intent = new Intent(this, FiltreIngredients.class);
+            startActivityForResult(intent, 40);
+        } else Toast.makeText(Filtre.this, "No hi ha ingredients!", Toast.LENGTH_SHORT).show();
+    }
+
+    public void filtratgeSenseIngredients(){
+
+        resultat = dbManager.filtrarSenseIngredients(llistaIngredients);
+
+        if(resultat.size() > 0) {
+            Intent intent = new Intent(this, ResultatFiltre.class);
+            startActivity(intent);
+        } else Toast.makeText(this, "No s'han trobat resultats.", Toast.LENGTH_SHORT).show();
     }
 }

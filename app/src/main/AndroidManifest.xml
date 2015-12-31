@@ -61,9 +61,14 @@
         </activity>
         <activity
             android:name=".ResultatFiltre"
+            android:label="Resultat del filtre"
             android:launchMode="singleTop"
-            android:parentActivityName=".MainActivity"
-            android:label="Resultat del filtre" >
+            android:parentActivityName=".MainActivity" >
+        </activity>
+        <activity
+            android:name=".FiltreIngredients"
+            android:parentActivityName=".Filtre"
+            android:label="Seleccionar Ingredients" >
         </activity>
     </application>
 

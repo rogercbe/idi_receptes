@@ -505,6 +505,70 @@ public class DBManager extends SQLiteOpenHelper {
 
         return receptes;
     }
+
+    public List filtrarSenseIngredients(List llistaIngredients) {
+
+        ArrayList<Recepta> receptes = new ArrayList<Recepta>();
+
+        //construir el where
+        String where;
+        if (llistaIngredients.size() > 0) {
+            where = "WHERE s._idIngredient=";
+
+            for(int i = 0; i < llistaIngredients.size(); ++i) {
+                Ingredient ing = (Ingredient) llistaIngredients.get(i);
+                int id = ing.getId();
+                where += id + " OR s._idIngredient=";
+            }
+
+            where = where.substring(0, where.length()-20);
+
+        } else return llegirReceptes();
+
+        //get receptes que tenen aquests ingredients
+
+        SQLiteDatabase db = getWritableDatabase();
+        //query("table", tableColumns, whereClause, whereArgs, null, null, orderBy);
+        String query = "SELECT * FROM receptes_ingredients s JOIN receptes r ON s._idRecepta=r._id " + where;
+        Cursor c = db.rawQuery(query, null);
+
+        List<Integer> id_receptes = new ArrayList<Integer>();
+
+        if (c.moveToFirst()) {
+            do {
+                id_receptes.add(c.getInt(c.getColumnIndexOrThrow("_id")));
+            } while(c.moveToNext());
+        }
+
+        //obtenir receptes que no son aquestes receptes
+        String clause;
+        clause = " WHERE _id <> ";
+
+        for(int i = 0; i <id_receptes.size(); ++i) {
+            int id = id_receptes.get(i);
+            clause += id + " AND _id <> ";
+        }
+
+        clause = clause.substring(0, clause.length()-12);
+
+        query = "SELECT * FROM receptes " + clause;
+        c = db.rawQuery(query, null);
+
+        if (c.moveToFirst()) {
+            do {
+                Recepta recepta = new Recepta();
+                recepta.setId(c.getInt(c.getColumnIndexOrThrow("_id")));
+                recepta.setTitol(c.getString(c.getColumnIndexOrThrow("_titol")));
+                recepta.setCategoria(c.getString(c.getColumnIndexOrThrow("_categoria")));
+                recepta.setDescripcio(c.getString(c.getColumnIndexOrThrow("_descripcio")));
+                recepta.setImatge(c.getInt(c.getColumnIndexOrThrow("_imatge")));
+                receptes.add(recepta);
+            } while(c.moveToNext());
+        }
+
+        if (c != null && c.isClosed()) c.close();
+        return receptes;
+    }
 }
 
 

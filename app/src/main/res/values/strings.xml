@@ -13,5 +13,6 @@
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_filtre">Filtre</string>
     <string name="title_activity_resultat_filtre">ResultatFiltre</string>
+    <string name="title_activity_filtre_ingredients">FiltreIngredients</string>
 
 </resources>

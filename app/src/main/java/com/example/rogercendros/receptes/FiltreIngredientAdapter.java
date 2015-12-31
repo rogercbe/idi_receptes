@@ -10,11 +10,11 @@ import android.widget.TextView;
 
 import java.util.List;
 
-class EditIngredientsAdapter extends ArrayAdapter<Ingredient> {
+class FiltreIngredientAdapter extends ArrayAdapter<Ingredient> {
 
     private List llista;
 
-    public EditIngredientsAdapter(Context context, List<Ingredient> objects) {
+    public FiltreIngredientAdapter(Context context, List<Ingredient> objects) {
         super(context, 0, objects);
 
         llista = objects;
@@ -40,7 +40,7 @@ class EditIngredientsAdapter extends ArrayAdapter<Ingredient> {
         Ingredient ingredient = getItem(position);
         txtIngredient.setText(ingredient.getNom());
 
-        boolean valor = EditarRecepta.llistaIngredients.contains(ingredient);
+        boolean valor = Filtre.llistaIngredients.contains(ingredient);
         txtIngredient.setChecked(valor);
 
         return listItemView;

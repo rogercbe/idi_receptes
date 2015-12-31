@@ -41,12 +41,11 @@
         android:layout_alignParentStart="true" />
 
     <Button
+        android:layout_marginTop="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Afegir"
         android:id="@+id/add"
-        android:textColor="#fff"
-        android:background="#16a085"
         android:layout_below="@+id/substitut"
         android:onClick="afegirSubstitut"
         android:layout_alignParentStart="true" />
