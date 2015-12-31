@@ -19,6 +19,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:id="@+id/original"
+        android:spinnerMode="dialog"
         android:layout_below="@+id/txtoriginal"
         android:layout_alignParentStart="true" />
 
@@ -35,6 +36,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:id="@+id/substitut"
+        android:spinnerMode="dialog"
         android:layout_below="@+id/txtsubstitut"
         android:layout_alignParentStart="true" />
 
@@ -43,6 +45,8 @@
         android:layout_height="wrap_content"
         android:text="Afegir"
         android:id="@+id/add"
+        android:textColor="#fff"
+        android:background="#16a085"
         android:layout_below="@+id/substitut"
         android:onClick="afegirSubstitut"
         android:layout_alignParentStart="true" />

@@ -7,7 +7,9 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -29,6 +31,7 @@ public class Filtre extends ActionBarActivity {
 
         inicialitzarSpinner();
         initSpinnerIngredients();
+        inicialitzarTipoFiltre();
     }
 
 
@@ -97,7 +100,67 @@ public class Filtre extends ActionBarActivity {
         sItems.setAdapter(adapter);
     }
 
-    public void filtratge(View v){
+    public void inicialitzarTipoFiltre()
+    {
+        List<String> spinnerArray =  new ArrayList<String>();
+
+        spinnerArray.add("Per Categoria");
+        spinnerArray.add("Amb Ingredient");
+        spinnerArray.add("Sense Ingredient");
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+                this, android.R.layout.simple_spinner_item, spinnerArray);
+
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        Spinner sItems = (Spinner) findViewById(R.id.stipo);
+        sItems.setAdapter(adapter);
+
+        sItems.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                Spinner spinner = (Spinner)findViewById(R.id.stipo);
+                String tipo = spinner.getSelectedItem().toString();
+                //mostrar diferents layouts depenent de la seleccio
+                if(tipo == "Per Categoria") {
+
+                    LinearLayout perCategoria = (LinearLayout) findViewById(R.id.filtre_categoria);
+                    perCategoria.setVisibility(View.VISIBLE);
+                    LinearLayout ambIngredient = (LinearLayout) findViewById(R.id.filtre_amb_ingredient);
+                    ambIngredient.setVisibility(View.INVISIBLE);
+                    LinearLayout senseIngredient = (LinearLayout) findViewById(R.id.filtre_sense_ingredient);
+                    senseIngredient.setVisibility(View.INVISIBLE);
+
+                } else if(tipo == "Amb Ingredient") {
+
+                    LinearLayout perCategoria = (LinearLayout) findViewById(R.id.filtre_categoria);
+                    perCategoria.setVisibility(View.INVISIBLE);
+                    LinearLayout ambIngredient = (LinearLayout) findViewById(R.id.filtre_amb_ingredient);
+                    ambIngredient.setVisibility(View.VISIBLE);
+                    LinearLayout senseIngredient = (LinearLayout) findViewById(R.id.filtre_sense_ingredient);
+                    senseIngredient.setVisibility(View.INVISIBLE);
+
+                } else {
+
+                    LinearLayout perCategoria = (LinearLayout) findViewById(R.id.filtre_categoria);
+                    perCategoria.setVisibility(View.INVISIBLE);
+                    LinearLayout ambIngredient = (LinearLayout) findViewById(R.id.filtre_amb_ingredient);
+                    ambIngredient.setVisibility(View.INVISIBLE);
+                    LinearLayout senseIngredient = (LinearLayout) findViewById(R.id.filtre_sense_ingredient);
+                    senseIngredient.setVisibility(View.VISIBLE);
+
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                return;
+            }
+
+        });
+
+    }
+
+    public void filtratge(){
         Spinner spinner = (Spinner)findViewById(R.id.spinner);
         String categoria = spinner.getSelectedItem().toString();
         resultat = dbManager.filtrarCategoria(categoria);
@@ -107,7 +170,7 @@ public class Filtre extends ActionBarActivity {
         } else Toast.makeText(this, "No s'han trobat resultats.", Toast.LENGTH_SHORT).show();
     }
 
-    public void filtratgeIngredient(View v){
+    public void filtratgeIngredient(){
         Spinner spinner2 = (Spinner)findViewById(R.id.spinner2);
         Ingredient ing = (Ingredient)spinner2.getSelectedItem();
         resultat = dbManager.filtrarIngredients(ing.getId());
@@ -116,5 +179,13 @@ public class Filtre extends ActionBarActivity {
             Intent intent = new Intent(this, ResultatFiltre.class);
             startActivity(intent);
         } else Toast.makeText(this, "No s'han trobat resultats.", Toast.LENGTH_SHORT).show();
+    }
+
+    public void aplicar(View v) {
+        Spinner spinner = (Spinner)findViewById(R.id.stipo);
+        String tipo = spinner.getSelectedItem().toString();
+        if(tipo == "Per Categoria") filtratge();
+        else if(tipo == "Amb Ingredient") filtratgeIngredient();
+        else Toast.makeText(this, "Falta fer", Toast.LENGTH_SHORT).show();
     }
 }

@@ -1,8 +1,3 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/ScrollView01"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
-
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
@@ -15,9 +10,34 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Filtrar per categoria"
-        android:id="@+id/textView"
+        android:text="Tipo de filtre"
+        android:id="@+id/tipo"
         android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
+
+    <Spinner
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/stipo"
+        android:layout_below="@+id/tipo"
+        android:spinnerMode="dialog" />
+
+    <LinearLayout
+        android:id="@+id/filtre_categoria"
+        android:visibility="visible"
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/stipo">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Categoria"
+        android:id="@+id/textView"
         android:layout_alignParentStart="true" />
 
     <Spinner
@@ -28,48 +48,68 @@
         android:layout_below="@+id/textView"
         android:spinnerMode="dialog"
         android:layout_alignParentStart="true" />
+    </LinearLayout>
 
-    <Button
-        android:layout_marginTop="40dp"
+    <LinearLayout
+        android:visibility="invisible"
+        android:id="@+id/filtre_amb_ingredient"
+        android:orientation="vertical"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Filtrar"
-        android:onClick="filtratge"
-        android:id="@+id/button2"
-        android:textColor="#fff"
-        android:background="#16a085"
-        android:layout_below="@+id/spinner"
-        android:layout_alignParentStart="true" />
+        android:layout_below="@id/stipo">
 
-    <TextView
-        android:layout_marginTop="40dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Receptes que portin"
-        android:id="@+id/textView2"
-        android:layout_below="@id/button2" />
+        <TextView
+            android:layout_marginTop="40dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Ingredient"
+            android:id="@+id/textView2" />
 
-    <Spinner
-        android:layout_marginTop="20dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/spinner2"
-        android:layout_below="@+id/textView2"
-        android:spinnerMode="dialog"
-        android:layout_alignParentStart="true" />
+        <Spinner
+            android:layout_marginTop="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/spinner2"
+            android:layout_below="@+id/textView2"
+            android:spinnerMode="dialog"
+            android:layout_alignParentStart="true" />
 
-    <Button
-        android:layout_marginTop="40dp"
+    </LinearLayout>
+
+    <LinearLayout
+        android:visibility="invisible"
+        android:id="@+id/filtre_sense_ingredient"
+        android:orientation="vertical"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Filtrar"
-        android:onClick="filtratgeIngredient"
+        android:layout_below="@id/stipo">
+
+        <TextView
+            android:layout_marginTop="40dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Ingredients"
+            android:id="@+id/textView3" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Seleccionar Ingredients"
+            android:id="@+id/btnSeleccionar"
+            android:onClick="seleccionarIngredients"
+            android:layout_below="@+id/textView3" />
+
+    </LinearLayout>
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Aplicar Filtre"
+        android:onClick="aplicar"
         android:id="@+id/button3"
         android:textColor="#fff"
         android:background="#16a085"
-        android:layout_below="@+id/spinner2"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentBottom="true" />
 </RelativeLayout>
-
-</ScrollView>
