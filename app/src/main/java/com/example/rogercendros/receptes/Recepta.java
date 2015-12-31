@@ -1,8 +1,11 @@
 package com.example.rogercendros.receptes;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.ArrayList;
 
-public class Recepta{
+public class Recepta {
 
     private int id;
     private String titol;
@@ -50,4 +53,5 @@ public class Recepta{
 
     @Override
     public String toString(){return titol;}
+
 }

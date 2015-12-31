@@ -458,12 +458,36 @@ public class DBManager extends SQLiteOpenHelper {
 
     }
 
-    public List filtrarCategoria(String categoria) {
+    public ArrayList<Recepta> filtrarCategoria(String categoria) {
 
-        List receptes = new ArrayList<Recepta>();
+        ArrayList<Recepta> receptes = new ArrayList<Recepta>();
         SQLiteDatabase db = getWritableDatabase();
         //query("table", tableColumns, whereClause, whereArgs, null, null, orderBy);
         Cursor c = db.query("receptes", null, "_categoria = '" + categoria +"'", null, null, null, "_data DESC");
+
+        if (c.moveToFirst()) {
+            do {
+                Recepta recepta = new Recepta();
+                recepta.setId(c.getInt(c.getColumnIndexOrThrow("_id")));
+                recepta.setTitol(c.getString(c.getColumnIndexOrThrow("_titol")));
+                recepta.setCategoria(c.getString(c.getColumnIndexOrThrow("_categoria")));
+                recepta.setDescripcio(c.getString(c.getColumnIndexOrThrow("_descripcio")));
+                recepta.setImatge(c.getInt(c.getColumnIndexOrThrow("_imatge")));
+                receptes.add(recepta);
+            } while(c.moveToNext());
+        }
+
+        if (c != null && c.isClosed()) c.close();
+
+        return receptes;
+    }
+
+    public List filtrarIngredients(int id) {
+        ArrayList<Recepta> receptes = new ArrayList<Recepta>();
+        SQLiteDatabase db = getWritableDatabase();
+        //query("table", tableColumns, whereClause, whereArgs, null, null, orderBy);
+        String query = "SELECT * FROM receptes_ingredients s JOIN receptes r ON s._idRecepta=r._id WHERE s._idIngredient="+id;
+        Cursor c = db.rawQuery(query, null);
 
         if (c.moveToFirst()) {
             do {

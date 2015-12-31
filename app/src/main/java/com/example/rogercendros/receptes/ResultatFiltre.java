@@ -1,7 +1,6 @@
 package com.example.rogercendros.receptes;
 
 import android.content.Intent;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -12,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class ResultatFiltre extends ActionBarActivity {
@@ -19,20 +19,20 @@ public class ResultatFiltre extends ActionBarActivity {
     private ListView list;
     private ArrayAdapter adaptador;
     private DBManager dbManager;
+    private List receptes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_resultat_filtre);
 
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
-
         dbManager = new DBManager(this, null);
+
+        receptes = Filtre.resultat;
 
         list = (ListView)findViewById(R.id.llista);
         //adaptador = new LlistaReceptaAdapter(this, DataSource.receptes);
-        adaptador = new LlistaReceptaAdapter(this, dbManager.llegirReceptes());
+        adaptador = new LlistaReceptaAdapter(this, receptes);
         list.setAdapter(adaptador);
 
         // Event on click de la llista

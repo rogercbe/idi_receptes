@@ -18,6 +18,7 @@ import java.util.List;
 public class Filtre extends ActionBarActivity {
 
     private DBManager dbManager;
+    public static List resultat;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +28,7 @@ public class Filtre extends ActionBarActivity {
         dbManager = new DBManager(this, null);
 
         inicialitzarSpinner();
+        initSpinnerIngredients();
     }
 
 
@@ -74,17 +76,45 @@ public class Filtre extends ActionBarActivity {
         sItems.setAdapter(adapter);
     }
 
+    public void initSpinnerIngredients()
+    {
+        // get llista tots els ingredients
+        List ingredients = dbManager.llegirIngredients();
+        // per cada ingredient afegirlo al spinner
+        List spinnerArray =  new ArrayList<Ingredient>();
+        Ingredient ing;
+
+        for(int i = 0; i < ingredients.size(); ++i) {
+            ing = (Ingredient)ingredients.get(i);
+            spinnerArray.add(ing);
+        }
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+                this, android.R.layout.simple_spinner_item, spinnerArray);
+
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        Spinner sItems = (Spinner) findViewById(R.id.spinner2);
+        sItems.setAdapter(adapter);
+    }
+
     public void filtratge(View v){
         Spinner spinner = (Spinner)findViewById(R.id.spinner);
         String categoria = spinner.getSelectedItem().toString();
-        List resultat = dbManager.filtrarCategoria(categoria);
+        resultat = dbManager.filtrarCategoria(categoria);
+        if(resultat.size() > 0) {
+            Intent intent = new Intent(this, ResultatFiltre.class);
+            startActivity(intent);
+        } else Toast.makeText(this, "No s'han trobat resultats.", Toast.LENGTH_SHORT).show();
+    }
 
-        Intent intent = new Intent(this, ResultatFiltre.class);
-        // passar llista de receptes
-        Bundle bundle = new Bundle();
-        bundle.putParcelable("data", resultat);
-        intent.putExtras(bundle);
+    public void filtratgeIngredient(View v){
+        Spinner spinner2 = (Spinner)findViewById(R.id.spinner2);
+        Ingredient ing = (Ingredient)spinner2.getSelectedItem();
+        resultat = dbManager.filtrarIngredients(ing.getId());
 
-        startActivity(intent);
+        if(resultat.size() > 0) {
+            Intent intent = new Intent(this, ResultatFiltre.class);
+            startActivity(intent);
+        } else Toast.makeText(this, "No s'han trobat resultats.", Toast.LENGTH_SHORT).show();
     }
 }
