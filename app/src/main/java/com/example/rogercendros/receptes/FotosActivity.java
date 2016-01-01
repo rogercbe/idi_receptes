@@ -1,6 +1,8 @@
 package com.example.rogercendros.receptes;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.provider.MediaStore;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -58,7 +60,36 @@ public class FotosActivity extends ActionBarActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
+        if(id == R.id.galeria) {
+
+            Intent pickImageIntent = new Intent(Intent.ACTION_PICK,android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+            pickImageIntent.setType("image/*");
+            pickImageIntent.putExtra("crop", "true");
+            pickImageIntent.putExtra("outputX", 180);
+            pickImageIntent.putExtra("outputY", 180);
+            pickImageIntent.putExtra("aspectX", 1);
+            pickImageIntent.putExtra("aspectY", 1);
+            pickImageIntent.putExtra("scale", true);
+            pickImageIntent.putExtra(MediaStore.EXTRA_OUTPUT, "@drawable");
+            pickImageIntent.putExtra("outputFormat",
+
+            Bitmap.CompressFormat.JPEG.toString());
+            startActivityForResult(pickImageIntent, 90);
+
+            return true;
+        }
+
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if (requestCode == 90) {
+            if(resultCode == ReceptaActivity.RESULT_OK){
+                data.getData();
+            }
+        }
     }
 
     public void tornarImatge(int id)

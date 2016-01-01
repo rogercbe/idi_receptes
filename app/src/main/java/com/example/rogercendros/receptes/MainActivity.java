@@ -169,9 +169,4 @@ public class MainActivity extends ActionBarActivity {
                 });
         alertDialog.show();
     }
-
-    public void buscar()
-    {
-
-    }
 }

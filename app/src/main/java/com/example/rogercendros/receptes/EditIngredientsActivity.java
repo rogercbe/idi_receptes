@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.text.InputFilter;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -151,6 +152,9 @@ public class EditIngredientsActivity extends ActionBarActivity {
 
     private void afegirIngredient() {
         final EditText txtIngredient = new EditText(this);
+        InputFilter[] fa= new InputFilter[1];
+        fa[0] = new InputFilter.LengthFilter(20);
+        txtIngredient.setFilters(fa);
 
         new AlertDialog.Builder(this)
                 .setTitle("Afegir Ingredient")
