@@ -13,7 +13,7 @@
         app:showAsAction="always" />
 
     <item android:id="@+id/help"
-        android:title="Ajuda"
+        android:title="Help"
         android:orderInCategory="10"
         app:showAsAction="always" />
 
