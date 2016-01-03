@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             android:onClick="seleccionar"
             android:textColor="#fff"
-            android:background="#16a085"
+            android:background="@drawable/button"
             android:text="Acceptar"/>
     </LinearLayout>
 

@@ -74,7 +74,7 @@
                 android:onClick="afegirRecepta"
                 android:layout_marginTop="50dp"
                 android:textColor="#fff"
-                android:background="#16a085"
+                android:background="@drawable/button"
                 android:layout_alignParentBottom="true"/>
 
         </LinearLayout>

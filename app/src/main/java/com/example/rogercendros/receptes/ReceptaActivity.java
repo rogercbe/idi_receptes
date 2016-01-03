@@ -71,6 +71,7 @@ public class ReceptaActivity extends ActionBarActivity {
         llista = dbManager.getIngredientsDeRecepta(id);
         ArrayAdapter<String> list_adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, llista);
         listingredients.setAdapter(list_adapter);
+
         ViewGroup.LayoutParams params = listingredients.getLayoutParams();
         params.height = llista.size() * 100;
         listingredients.setLayoutParams(params);

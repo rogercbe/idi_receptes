@@ -110,6 +110,6 @@
         android:onClick="aplicar"
         android:id="@+id/button3"
         android:textColor="#fff"
-        android:background="#16a085"
+        android:background="@drawable/button"
         android:layout_alignParentBottom="true" />
 </RelativeLayout>
